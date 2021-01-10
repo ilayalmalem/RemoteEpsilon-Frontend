@@ -1,133 +1,95 @@
-html {
-    height: auto;
-}
-
 $bodyPadding: 100px;
 
-body {
-    margin: 0;
-}
-
 #main {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    margin: 0;
-    background: -webkit-linear-gradient(to right, #000428, #004E92);
-    background: linear-gradient(to bottom right, #000428, #004E92);
+  background-repeat: no-repeat;
+  font-family: 'Montserrat', sans-serif;
+  background-attachment: fixed;
+  margin: 0;
+  background: -webkit-linear-gradient(to right, #000428, #004E92);
+  background: linear-gradient(to bottom right, #000428, #004E92);
 }
 
-.no-decoration {
-    text-decoration: none;
+.navbar-wrapper {
+  height: 20vh;
+  width: 100vw;
+}
+
+.app {
+  height: 80vh;
+  width: 100vw;
+}
+
+.content {
+  height: 100%;
+  padding: 45px $bodyPadding;
+}
+
+.home-page {
+  height: 100%;
 }
 
 .navbar {
-    width: 100%;
-    height: 20vh;
-    .navbar-content {
-        padding: 45px $bodyPadding;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        //padding: 45px $bodyPadding;
-    }
-    .logo {
-        color: white;
-        font-size: 22px;
-        font-weight: 600;
-    }
+  padding: 45px $bodyPadding;
+  width: 100%;
 
-    .link {
-        color: white;
-        font-weight: 300;
-        text-decoration: none;
-        margin-left: 80px;
-        transition-duration: 500ms;
-        transition: font-weight ease-out;
-        &:hover {
-            font-weight: 500;
-            transition-duration: 500ms;
-        }
-    }
+  .navbar-content {
 
-    .link-list {
-        display: flex;
-        align-items: center;
-        .link.link-main {
-            background-color: #FF5791;
-            padding: 15px;
-            font-weight: 500;
-            border-radius: 99999px;
-        }
-    }
+  }
 }
 
-#app {
-    width: 100%;
-    color: white;
-    height: 80vh;
-    #app-content {
-        padding: 45px $bodyPadding;
-        height: 45vh;
-        //background-color: #fff;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        #left-content {
-            display: flex;
-            //background-color: yellow;
-            flex-direction: column;
-            justify-content: center;
-            width: 50%;
-            #headline {
-                font-weight: 500;
-                font-size: 25px;
-            }
-
-            #subheadline {
-                font-size: 17px;
-                line-height: 1.5;
-                margin-top: 12px;
-                font-weight: lighter;
-                width: 60%;
-            }
-
-            #cta {
-                font-family: 'Montserrat', sans-serif;
-                background-color: #FF5791;
-                padding: 15px;
-                font-weight: 400;
-                border-radius: 99999px;
-                width: 25%;
-                color: white;
-                margin-top: 23px;
-                border: none;
-                font-size: 16px;
-                outline: none;
-
-                &:hover {
-                    opacity: 0.8;
-                    cursor: pointer;
-                }
-            }
-        }
-        
-        #right-content {
-            //flex-grow: 1;
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            img {
-                width: 80%;
-            }
-        }
-    }
+.logo {
+  font-size: 22px;
 }
 
-.extender {
-    width: 100vw;
-    height: 100vh;
-    background-color: #000;
+.link {
+  font-weight: 300;
+  text-decoration: none;
+  margin-left: 80px;
+  transition-duration: 500ms;
+  transition: font-weight ease-out;
+
+  &:hover {
+    font-weight: 500;
+    transition-duration: 500ms;
+  }
+}
+
+.link-list {
+  .link.link-main {
+    background-color: #FF5791;
+    padding: 14px;
+    font-weight: 500;
+  }
+}
+
+#headline {
+  font-weight: 500;
+  font-size: 25px;
+}
+
+#subheadline {
+  font-size: 17px;
+  line-height: 1.5;
+  margin-top: 12px;
+  font-weight: 400;
+  width: 60%;
+}
+
+#cta {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #FF5791;
+  padding: 15px;
+  font-weight: 400;
+  border-radius: 99999px;
+  width: 25%;
+  color: white;
+  margin-top: 23px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
