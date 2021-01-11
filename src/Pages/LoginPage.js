@@ -11,24 +11,23 @@ import logo from '../assets/logo.svg';
 const styles = theme => ({
     root: {
         '& .MuiInputBase-input': {
-            color: 'white', // Text color
+            color: 'black', // Text color
         },
 
         '& .MuiInput-underline:before': {
-            // color: 'white',
-            borderBottomColor: '#fff8', // Semi-transparent underline
+            borderBottomColor: 'gray', // Semi-transparent underline
         },
         '& .MuiInput-underline:hover:before': {
-            borderBottomColor: '#fff', // Solid underline on hover
+            borderBottomColor: '#3f51b5', // Solid underline on hover
         },
         '& .MuiInput-underline:after': {
-            borderBottomColor: '#fff', // Solid underline on focus
+            // borderBottomColor: '#000', // Solid underline on focus
         },
     },
 
     textField: {
-        borderColor: '#fff',
-        color: '#fff'
+        // borderColor: '#fff',
+        color: '#000'
     },
     noPadding: {
         padding: 0,
@@ -53,22 +52,24 @@ function LoginPage(props) {
     const {classes} = props;
 
     return (
-        <div className="wrapper flex justify-center h-full w-full" dir="ltr">
-            <div style={{backgroundColor: '#273A79'}} className="flex flex-col justify-start h-3/4 w-3/12 p-6">
-                <div className="logo mb-auto flex justify-center">
+        <div className="wrapper flex justify-center lg:h-full w-full" dir="ltr">
+            <div  className="flex bg-white shadow-xl flex-col justify-start border-2 w-full md:w-8/12 lg:w-6/12 lg:h-full xl:w-3/12 p-6">
+                <div className="logo flex lg:mb-auto justify-center">
                     <img src={logo} className="w-2/12"/>
                 </div>
-                <div className="w-full h-full mb-auto mt-5">
+                <div className="w-full lg:h-full lg:mb-auto mt-8">
                     <form className={classes.root}>
                         <Tooltip title="מספרים בלבד , 9 ספרות." placement="right" aria-label="add">
                             <TextField
+                                variant="outlined"
                                 fullWidth
                                 className={classes.textField}
                                 onChange={e => setId(e.target.value)}
                                 value={id}
                                 label="תעודת זהות"
                                 InputLabelProps={{
-                                    style: {color: '#fff8'},
+                                    style: {color: '#000'},
+                                    dir: "rtl"
                                 }}
 
                                 id="custom-css-outlined-input"
@@ -76,15 +77,15 @@ function LoginPage(props) {
                             />
                         </Tooltip>
 
-                        <div className="h-3"></div>
+                        <div className="h-7"></div>
 
                         <TextField
                             fullWidth
-                            // dir={"rtl"}
+                            variant="outlined"
                             className={classes.textField}
                             label="סיסמה"
                             InputLabelProps={{
-                                style: {color: '#fff8'},
+                                style: {color: '#000'},
                             }}
                             onChange={e => setPassword(e.target.value)}
                             value={password}
@@ -97,7 +98,7 @@ function LoginPage(props) {
                                             onMouseDown={handleMouseDownPassword}
                                         >
                                             {showPassword ? <VisibilityOff className="text-blue-400"/> :
-                                                <Visibility style={{color: '#fff8'}}/>}
+                                                <Visibility style={{color: 'gray'}}/>}
                                         </IconButton>
                                     </InputAdornment>
                                 )
@@ -106,15 +107,16 @@ function LoginPage(props) {
                             type={showPassword ? "text" : "password"}
                         />
                         {/*<div className="checkbox-wrapper  flex justify-end">*/}
-                            <label dir="ltr" className="inline-flex items-center mt-3">
+                            <label dir="ltr" className="inline-flex items-center mt-5">
                                 <input type="checkbox" className="form-checkbox h-5 w-5" onChange={() => setRememberMe(!rememberMe)} checked={rememberMe} /><span
-                                    className="ml-2 text-white text-sm">זכור אותי</span>
+                                    className="ml-2 text-black text-sm">זכור אותי</span>
                             </label>
                         {/*</div>*/}
 
                         <button disabled={(id.length != 9 || password.length <= 4) ? true : false}
                                 onClick={e => handleSubmit(e, id, password)}
-                                className={"w-full outline-none bg-red-400 mt-4 h-10 text-white" + ((id.length != 9 || password.length <= 4) ? ' opacity-50' : ' opacity-100')}>התחבר
+                                className={"w-full outline-none bg-red-400 mt-4 h-10 text-white" +
+                                "" + ((id.length != 9 || password.length <= 4) ? ' opacity-50' : ' opacity-100')}>התחבר
                         </button>
                     </form>
                 </div>

@@ -1,12 +1,12 @@
-$bodyPadding: 100px;
 
 #main {
   background-repeat: no-repeat;
   font-family: 'Montserrat', sans-serif;
   background-attachment: fixed;
   margin: 0;
-  background: -webkit-linear-gradient(to right, #000428, #004E92);
-  background: linear-gradient(to bottom right, #000428, #004E92);
+  background: -webkit-linear-gradient(to bottom right, #B9FCFF, #fff);
+  background: linear-gradient(to bottom right, #B9FCFF, #fff);
+  //background-color: #fff;
 }
 
 .navbar-wrapper {
@@ -21,7 +21,7 @@ $bodyPadding: 100px;
 
 .content {
   height: 100%;
-  padding: 45px $bodyPadding;
+  padding: 45px 2.5rem;
 }
 
 .home-page {
@@ -29,7 +29,7 @@ $bodyPadding: 100px;
 }
 
 .navbar {
-  padding: 45px $bodyPadding;
+  padding: 45px 0px;
   width: 100%;
 }
 

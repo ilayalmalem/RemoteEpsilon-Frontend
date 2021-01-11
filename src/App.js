@@ -22,7 +22,7 @@ function App() {
                 </div>
 
                 <div className="app">
-                    <div className="content">
+                    <div className="content px-10 md:px-20">
                         <Switch>
                             {/*<Route path="/getstarted" exact>*/}
                             {/*    <GetStartedPage/>*/}

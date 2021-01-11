@@ -4,7 +4,7 @@ import {useRef} from "react";
 
 export default function HomePage(props) {
     return (
-        <div className="home-page text-white">
+        <div className="home-page text-black">
             <div className="content-wrapper flex w-full h-full">
                 <div className="left-content h-4/6 flex flex-col justify-center w-1/2">
                     <div id="headline">
@@ -18,7 +18,7 @@ export default function HomePage(props) {
                         props.scrollTo.current.scrollIntoView({
                             behavior: "smooth"
                         })
-                    }} id="cta">Get Started
+                    }} id="cta">התחילו
                     </button>
                 </div>
 
