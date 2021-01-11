@@ -18,7 +18,7 @@ export default function GetStartedPage() {
                         50 Staff per Year. <br/>
                         25GB of storage per Year. <br/>
                     </div>
-                    <button style={{'backgroundColor': '#4A00E0'}}
+                    <button style={{'backgroundColor': '#4a00e0'}}
                             className="join-btn text-white py-2 mt-auto bottom-5 w-full bg-red-400">Join now
                     </button>
                 </div>

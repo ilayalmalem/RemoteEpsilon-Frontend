@@ -31,10 +31,6 @@ $bodyPadding: 100px;
 .navbar {
   padding: 45px $bodyPadding;
   width: 100%;
-
-  .navbar-content {
-
-  }
 }
 
 .logo {
@@ -44,7 +40,7 @@ $bodyPadding: 100px;
 .link {
   font-weight: 300;
   text-decoration: none;
-  margin-left: 80px;
+  margin-right: 80px;
   transition-duration: 500ms;
   transition: font-weight ease-out;
 

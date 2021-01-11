@@ -8,10 +8,10 @@ export default function HomePage(props) {
             <div className="content-wrapper flex w-full h-full">
                 <div className="left-content h-4/6 flex flex-col justify-center w-1/2">
                     <div id="headline">
-                        Rediscover Remote Learning.
+                        הכירו סוג חדש של למידה מרחוק.
                     </div>
                     <div id="subheadline">
-                        We at remote epsilon try to make the remote learning experience just as fun as being in class.
+                        בואו לחוות סוג חדש של למידה מרחוק. כל הכלים הדרושים במקום אחד, בכל זמן, מכל מקום במקסימום נוחות.
                     </div>
 
                     <button onClick={() => {
@@ -22,26 +22,11 @@ export default function HomePage(props) {
                     </button>
                 </div>
 
-                <div className="right-side flex justify-end items-start w-1/2">
+                <div className="right-side flex mt-3 justify-end items-start w-1/2">
                     <img className="w-10/12" src={illustration} alt=""/>
                 </div>
             </div>
-            {/*<div id="app">*/}
-            {/*    <div id="app-content">*/}
-            {/*        <div id="left-content">*/}
-            {/*            <div id="headline">*/}
-            {/*                Rediscover Remote learning.*/}
-            {/*            </div>*/}
-            {/*            <div id="subheadline">*/}
-            {/*                We at remote epsilon try to make the remote learning expirience just as fun as being in class.*/}
-            {/*            </div>*/}
 
-
-            {/*        <div id="right-content">*/}
-
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </div>
     )
 }

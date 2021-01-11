@@ -10,12 +10,13 @@ import HomePage from "./Pages/HomePage";
 import GetStartedPage from "./Pages/GetStartedPage";
 import {useRef} from "react";
 import RegisterPage from "./Pages/RegisterPage";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
     const section2 = useRef(null);
     return (
         <Router>
-            <div id="main" className="w-full h-screen">
+            <div id="main"  className="w-full h-screen" dir="rtl">
                 <div className="navbar-wrapper">
                     <Navbar/>
                 </div>
@@ -23,9 +24,9 @@ function App() {
                 <div className="app">
                     <div className="content">
                         <Switch>
-                            <Route path="/getstarted" exact>
-                                <GetStartedPage/>
-                            </Route>
+                            {/*<Route path="/getstarted" exact>*/}
+                            {/*    <GetStartedPage/>*/}
+                            {/*</Route>*/}
 
                             <Route path="/teachers" exact>
                                 <div className="text-white">Teachers</div>
@@ -39,7 +40,7 @@ function App() {
                                 <div className="text-white">About</div>
                             </Route>
 
-                            <Route path="/register" component={RegisterPage} />
+                            <Route path="/login" component={LoginPage} />
 
                             <Route path="/" exact>
                                 <HomePage scrollTo={section2}/>
