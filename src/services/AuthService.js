@@ -1,6 +1,6 @@
 const AuthService = {
   isAuthenticated: () => {
-    return Boolean(localStorage.getItem('remote_epsilon_is_auth'));
+    return localStorage.getItem('remote_epsilon_is_auth') == 'true' ? true : false;
   },
   authenticate: (user) => {
     localStorage.setItem('remote_epsilon_is_auth', 'true');

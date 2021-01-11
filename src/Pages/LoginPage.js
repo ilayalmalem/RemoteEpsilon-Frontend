@@ -63,6 +63,7 @@ function LoginPage(props) {
         });
         // Change service
         AuthService.authenticate(user);
+        props.setLoggedIn(true);
     }
 
     const {classes} = props;

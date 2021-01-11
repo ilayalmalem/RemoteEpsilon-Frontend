@@ -1,21 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import AuthService from "../services/AuthService";
 import {Button, IconButton, Menu, MenuItem} from "@material-ui/core";
 import {Component, useState} from "react";
-import {MoreVert} from "@material-ui/icons";
 
-export default function Navbar() {
-
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState()
-
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+export default function Navbar(props) {
 
     return (
         <nav className="navbar w-full">
@@ -27,13 +15,13 @@ export default function Navbar() {
                     <Link className="link text-sm md:text-base text-red-400 rounded-full text-white"
                           to="/login">התחברות</Link>
                 </div>
-                {AuthService.isAuthenticated() ?
+                {props.loggedIn ?
                     <ul className="hidden md:flex link-list flex items-center">
                         <Link className="link" to="/dashboard">דף בית</Link>
                         <Link className="link" to="/assignments">מטלות</Link>
                         <Link className="link" to="/myclass">הכיתה שלי</Link>
                         <Link className="link" to="/myaccount">
-                            <LongMenu/>
+                            <LongMenu setLogged={props.setLoggedIn} />
                         </Link>
                     </ul>
                     :
@@ -50,11 +38,11 @@ export default function Navbar() {
     )
 }
 
-function LongMenu() {
+function LongMenu(props) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState()
-
-    const recordButtonPosition = (event: any) => {
+    const history= useHistory();
+    const recordButtonPosition = (event) => {
         setAnchorEl(event.currentTarget);
         setMenuOpen(true);
     }
@@ -75,7 +63,11 @@ function LongMenu() {
                 <Link to="/settings">
                     <MenuItem onClick={closeMenu}> Settings </MenuItem>
                 </Link>
-                <Link to="/logout">
+                <Link onClick={ () => {
+                    AuthService.logout();
+                    props.setLogged(false);
+                    history.push('/')
+                }}>
                     <MenuItem onClick={closeMenu}> Logout </MenuItem>
                 </Link>
             </Menu>

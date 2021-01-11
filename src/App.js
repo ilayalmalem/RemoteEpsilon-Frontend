@@ -9,7 +9,7 @@ import './Styles/main.scss';
 import Navbar from "./components/Navbar";
 import HomePage from "./Pages/HomePage";
 import GetStartedPage from "./Pages/GetStartedPage";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
@@ -17,12 +17,13 @@ import AuthService from "./services/AuthService";
 
 function App() {
     const section2 = useRef(null);
+    const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
 
     return (
         <Router>
             <div id="main"  className="w-full h-screen" dir="rtl">
                 <div className="navbar-wrapper">
-                    <Navbar/>
+                    <Navbar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
                 </div>
 
                 <div className="app">
@@ -42,10 +43,12 @@ function App() {
                                 <div className="text-white">About</div>
                             </Route>
 
-                            <Route path="/login" component={LoginPage} />
+                            <Route path="/login">
+                                <LoginPage setLoggedIn={setLoggedIn} />
+                            </Route>
 
                             <Route path="/" exact>
-                                {AuthService.isAuthenticated() ?
+                                {loggedIn ?
                                     <Dashboard />
                                     :
                                     <HomePage scrollTo={section2}/>
