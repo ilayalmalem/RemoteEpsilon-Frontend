@@ -9,6 +9,7 @@
   //background-color: #fff;
 }
 
+
 .navbar-wrapper {
   height: 20vh;
   width: 100vw;
@@ -33,9 +34,6 @@
   width: 100%;
 }
 
-.logo {
-  font-size: 22px;
-}
 
 .link {
   font-weight: 300;
@@ -50,13 +48,12 @@
   }
 }
 
-.link-list {
   .link.link-main {
     background-color: #FF5791;
     padding: 14px;
     font-weight: 500;
   }
-}
+
 
 #headline {
   font-weight: 500;
@@ -68,7 +65,6 @@
   line-height: 1.5;
   margin-top: 12px;
   font-weight: 400;
-  width: 60%;
 }
 
 #cta {
@@ -77,9 +73,7 @@
   padding: 12px;
   font-weight: 400;
   border-radius: 99999px;
-  width: 25%;
   color: white;
-  margin-top: 23px;
   border: none;
   font-size: 16px;
   outline: none;
