@@ -9,9 +9,9 @@ export default function Navbar() {
                     <div className="logo font-bold">RemoteEpsilon</div>
                 </Link>
                 <ul className="link-list flex items-center">
-                    <Link className="link" to="/">For teachers</Link>
-                    <Link className="link" to="/login">About</Link>
-                    <Link className="link" to="/register">For students</Link>
+                    <Link className="link" to="/teachers">For teachers</Link>
+                    <Link className="link" to="/students">For students</Link>
+                    <Link className="link" to="/about">About</Link>
                     <Link className="link link-main rounded-full" to="/getstarted">Get started</Link>
                 </ul>
             </div>

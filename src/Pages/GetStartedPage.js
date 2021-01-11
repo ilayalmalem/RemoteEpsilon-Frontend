@@ -1,7 +1,7 @@
 export default function GetStartedPage() {
     return (
         <div className="relative flex flex-col h-full">
-            <div className="div mb-5 text-white font-bold text-xl left-0 top 0">
+            <div className="div mb-5 text-white font-semibold text-xl left-0 top 0">
                 Want RemoteEpsilon In Your School?
             </div>
 

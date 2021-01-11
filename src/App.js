@@ -27,7 +27,20 @@ function App() {
                                 <GetStartedPage/>
                             </Route>
 
+                            <Route path="/teachers" exact>
+                                <div className="text-white">Teachers</div>
+                            </Route>
+
+                            <Route path="/students" exact>
+                                <div className="text-white">Students</div>
+                            </Route>
+
+                            <Route path="/about" exact>
+                                <div className="text-white">About</div>
+                            </Route>
+
                             <Route path="/register" component={RegisterPage} />
+
                             <Route path="/" exact>
                                 <HomePage scrollTo={section2}/>
                             </Route>
