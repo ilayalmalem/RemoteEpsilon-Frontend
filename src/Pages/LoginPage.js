@@ -7,6 +7,8 @@ import {
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import '../Styles/authentication.scss';
 import logo from '../assets/logo.svg';
+import {useHistory} from "react-router-dom";
+import AuthService from "../services/AuthService";
 
 const styles = theme => ({
     root: {
@@ -39,21 +41,36 @@ function LoginPage(props) {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const history = useHistory();
 
     const handleSubmit = (e, id, password) => {
         e.preventDefault();
-        alert(`Attempting login with ${id} and ${password}`);
+        const user = {
+            name: 'Ilay David Almalem',
+            id: 216331470,
+            email: 'ilayalmalem@gmail.com',
+            phone: '0504841222',
+            role: 'student'
+        };
+        history.push({
+            pathname: '/dashboard',
+            state: {
+                user: user
+            }
+        });
+        // Change service
+        AuthService.authenticate(user);
     }
 
     const {classes} = props;
 
     return (
         <div className="wrapper flex justify-center lg:h-full w-full" dir="ltr">
-            <div  className="flex bg-white shadow-xl flex-col justify-start border-2 w-full md:w-8/12 lg:w-6/12 lg:h-full xl:w-3/12 p-6">
+            <div
+                className="flex bg-white shadow-xl flex-col justify-start border-2 w-full md:w-8/12 lg:w-6/12 lg:h-full xl:w-3/12 p-6">
                 <div className="logo flex lg:mb-auto justify-center">
                     <img src={logo} className="w-2/12"/>
                 </div>
@@ -107,10 +124,11 @@ function LoginPage(props) {
                             type={showPassword ? "text" : "password"}
                         />
                         {/*<div className="checkbox-wrapper  flex justify-end">*/}
-                            <label dir="ltr" className="inline-flex items-center mt-5">
-                                <input type="checkbox" className="form-checkbox h-5 w-5" onChange={() => setRememberMe(!rememberMe)} checked={rememberMe} /><span
-                                    className="ml-2 text-black text-sm">זכור אותי</span>
-                            </label>
+                        <label dir="ltr" className="inline-flex items-center mt-5">
+                            <input type="checkbox" className="form-checkbox h-5 w-5"
+                                   onChange={() => setRememberMe(!rememberMe)} checked={rememberMe}/><span
+                            className="ml-2 text-black text-sm">זכור אותי</span>
+                        </label>
                         {/*</div>*/}
 
                         <button disabled={(id.length != 9 || password.length <= 4) ? true : false}

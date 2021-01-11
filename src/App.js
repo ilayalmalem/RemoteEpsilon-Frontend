@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect
 } from "react-router-dom";
 import './Styles/main.scss';
 import Navbar from "./components/Navbar";
@@ -11,9 +12,12 @@ import GetStartedPage from "./Pages/GetStartedPage";
 import {useRef} from "react";
 import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
+import Dashboard from "./Pages/Dashboard";
+import AuthService from "./services/AuthService";
 
 function App() {
     const section2 = useRef(null);
+
     return (
         <Router>
             <div id="main"  className="w-full h-screen" dir="rtl">
@@ -24,9 +28,7 @@ function App() {
                 <div className="app">
                     <div className="content px-10 md:px-20">
                         <Switch>
-                            {/*<Route path="/getstarted" exact>*/}
-                            {/*    <GetStartedPage/>*/}
-                            {/*</Route>*/}
+                            <PrivateRoute path="/dashboard/" component={Dashboard} />
 
                             <Route path="/teachers" exact>
                                 <div className="text-white">Teachers</div>
@@ -43,7 +45,11 @@ function App() {
                             <Route path="/login" component={LoginPage} />
 
                             <Route path="/" exact>
-                                <HomePage scrollTo={section2}/>
+                                {AuthService.isAuthenticated() ?
+                                    <Dashboard />
+                                    :
+                                    <HomePage scrollTo={section2}/>
+                                }
                             </Route>
                         </Switch>
                     </div>
@@ -55,3 +61,22 @@ function App() {
 }
 
 export default App;
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+
+    const isLoggedIn = AuthService.isAuthenticated();
+
+    return (
+        <Route
+            {...rest}
+            render={props =>
+                isLoggedIn ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                )
+            }
+        />
+    )
+}
