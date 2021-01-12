@@ -1,7 +1,7 @@
 import {Link, useHistory} from "react-router-dom";
 import AuthService from "../services/AuthService";
-import {Button, IconButton, Menu, MenuItem} from "@material-ui/core";
-import {Component, useState} from "react";
+import {Menu, MenuItem} from "@material-ui/core";
+import {useState} from "react";
 
 export default function Navbar(props) {
 
@@ -63,7 +63,7 @@ function LongMenu(props) {
                 <Link to="/settings">
                     <MenuItem onClick={closeMenu}> Settings </MenuItem>
                 </Link>
-                <Link onClick={ () => {
+                <Link onClick={() => {
                     AuthService.logout();
                     props.setLogged(false);
                     history.push('/')

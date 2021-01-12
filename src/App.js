@@ -8,9 +8,7 @@ import {
 import './Styles/main.scss';
 import Navbar from "./components/Navbar";
 import HomePage from "./Pages/HomePage";
-import GetStartedPage from "./Pages/GetStartedPage";
 import {useRef, useState} from "react";
-import RegisterPage from "./Pages/RegisterPage";
 import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import AuthService from "./services/AuthService";

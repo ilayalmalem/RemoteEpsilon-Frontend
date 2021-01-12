@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 import {
     IconButton,
     InputAdornment,
@@ -22,13 +22,9 @@ const styles = theme => ({
         '& .MuiInput-underline:hover:before': {
             borderBottomColor: '#3f51b5', // Solid underline on hover
         },
-        '& .MuiInput-underline:after': {
-            // borderBottomColor: '#000', // Solid underline on focus
-        },
     },
 
     textField: {
-        // borderColor: '#fff',
         color: '#000'
     },
     noPadding: {
