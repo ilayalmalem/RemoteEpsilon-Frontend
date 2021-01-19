@@ -19,7 +19,7 @@ export default function Dashboard() {
         <>
             <div className="top-bar font-semibold text-2xl flex justify-between w-full">
                 <div className="greeting">
-                    בוקר טוב, {user.name}
+                    {DateService.getGreeting(date.getHours())}, {user.name}.
                 </div>
                 <div className="date">
                     {date.getUTCDate()} ב{DateService.toMonth(date.getUTCMonth())}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
