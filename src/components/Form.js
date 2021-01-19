@@ -42,37 +42,41 @@ function Form(props) {
     const history = useHistory();
     const [idErrors, setIdErrors] = useState('');
     const [passwordErrors, setPasswordErrors] = useState('');
+    const [allErrors, setAllErrors] = useState('');
 
-    const handleSubmit = (e, id, password) => {
+    const handleSubmit = async (e, id, password) => {
         e.preventDefault();
 
         // This in production will be replaced to an api call to fetch user data to be stored
         const user = {
-            name: 'עילאי דוד אלמלם',
+            // name: 'עילאי דוד אלמלם',
             id: id,
             password: password,
-            email: 'ilayalmalem@gmail.com',
-            phone: '0504841222',
-            role: 'student'
+            // email: 'ilayalmalem@gmail.com',
+            // phone: '0504841222',
+            // role: 'student'
         };
 
-        const authorized = AuthService.authenticate(user);
-        if(authorized.state == true) {
-            props.setLoggedIn(true);
-            history.push({
-                pathname: '/dashboard',
-                state: {
-                    user: user
+        const authorized = await AuthService.authenticate(user)
+                console.log(authorized)
+                if(authorized.state == true) {
+                    props.setLoggedIn(true);
+                    history.push({
+                        pathname: '/dashboard',
+                        state: {
+                            user: user
+                        }
+                    });
+                    setIdErrors('');
+                    setPasswordErrors('');
+                    setAllErrors('');
                 }
-            });
-            setIdErrors(authorized.errors.id);
-            setPasswordErrors(authorized.errors.password);
-        }
-        else {
-            setIdErrors(authorized.errors.id);
-            setPasswordErrors(authorized.errors.password);
-        }
-    }
+                else {
+                    setIdErrors(authorized.errors.id);
+                    setPasswordErrors(authorized.errors.password);
+                    setAllErrors(authorized.errors.all);
+                }
+            }
     const appDir = props.isRtl ? 'rtl' : 'ltr';
     const {classes} = props;
     return (
@@ -140,6 +144,9 @@ function Form(props) {
             />
             <div dir={appDir} className="text-red-400 text-sm">
                 {passwordErrors}
+            </div>
+            <div dir={appDir} className="text-red-400 text-sm ">
+                {allErrors}
             </div>
             <label dir={appDir} className="inline-flex items-center mt-5 w-full">
                 <input type="checkbox" className="form-checkbox h-5 w-5"

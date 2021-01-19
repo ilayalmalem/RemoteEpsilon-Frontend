@@ -5,13 +5,16 @@ import '../Styles/dashboard.scss';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DescriptionIcon from '@material-ui/icons/Description';
 import TodayIcon from '@material-ui/icons/Today';
+import {Tooltip} from "@material-ui/core";
+import GlobalsService from "../services/GlobalsService";
 
 export default function Dashboard() {
     const [date, setDate] = useState(new Date(Date.now()));
 
     setInterval(() => {
         setDate(() => new Date(Date.now()))
-    }, 1000)
+
+    }, GlobalsService.settings.clockTickRate)
 
     const user = AuthService.getUser();
     return (
@@ -19,7 +22,7 @@ export default function Dashboard() {
         <>
             <div className="top-bar font-semibold text-2xl flex justify-between w-full">
                 <div className="greeting">
-                    {DateService.getGreeting(date.getHours())}, {user.name}.
+                    {DateService.getGreeting(date.getHours())}, {user.email}.
                 </div>
                 <div className="date">
                     {date.getUTCDate()} ב{DateService.toMonth(date.getUTCMonth())}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
@@ -41,15 +44,23 @@ export default function Dashboard() {
                     </div>
 
                     <div className="bottom w-full justify-evenly my-10 flex flex-grow">
-                        <div className="shortcut-block flex-grow flex justify-center items-center text-4xl">
-                            <QuestionAnswerIcon style={{ fontSize: 60 }} />
-                        </div>
-                        <div className="shortcut-block mx-5 flex-grow flex justify-center items-center text-4xl">
-                            <DescriptionIcon style={{ fontSize: 60 }} />
-                        </div>
-                        <div className="shortcut-block flex-grow flex justify-center items-center text-4xl">
-                            <TodayIcon style={{ fontSize: 60 }} />
-                        </div>
+                        <Tooltip placement="bottom" aria-label="add" title="צ׳אטים">
+                            <div className="shortcut-block flex-grow flex justify-center items-center text-4xl">
+                                <QuestionAnswerIcon style={{ fontSize: 60 }} />
+                            </div>
+                        </Tooltip>
+
+                        <Tooltip placement="bottom" aria-label="add" title="קבצים">
+                            <div className="shortcut-block mx-5 flex-grow flex justify-center items-center text-4xl">
+                                <DescriptionIcon style={{ fontSize: 60 }} />
+                            </div>
+                        </Tooltip>
+
+                        <Tooltip placement="bottom" aria-label="add" title="לוח שנה">
+                            <div className="shortcut-block flex-grow flex justify-center items-center text-4xl">
+                                <TodayIcon style={{ fontSize: 60 }} />
+                            </div>
+                        </Tooltip>
                     </div>
                 </div>
 
