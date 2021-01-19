@@ -45,7 +45,7 @@ function LoginPage(props) {
     const handleSubmit = (e, id, password) => {
         e.preventDefault();
         const user = {
-            name: 'Ilay David Almalem',
+            name: 'עילאי דוד אלמלם',
             id: 216331470,
             email: 'ilayalmalem@gmail.com',
             phone: '0504841222',

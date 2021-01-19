@@ -1,4 +1,9 @@
 
+$bgSecondary: #74FAFF;
+$textImportant: #C31F1F;
+$bgPrimary: #FF5791;
+
+
 #main {
   background-repeat: no-repeat;
   font-family: 'Montserrat', sans-serif;
@@ -10,12 +15,12 @@
 
 
 .navbar-wrapper {
-  height: 20vh;
+  height: 15vh;
   width: 100vw;
 }
 
 .app {
-  height: 80vh;
+  height: 85vh;
   width: 100vw;
 }
 
@@ -44,6 +49,9 @@
   &:hover {
     font-weight: 500;
     transition-duration: 500ms;
+  }
+  &:focus {
+    outline: none;
   }
 }
 
@@ -80,5 +88,39 @@
   &:hover {
     opacity: 0.8;
     cursor: pointer;
+  }
+}
+
+.assignments-overdue {
+  background-color: $bgSecondary;
+
+  .left-side {
+    .title {
+      color: $textImportant;
+    }
+
+    .review-btn {
+      background-color: $bgPrimary;
+    }
+  }
+}
+
+.shortcut-block {
+  background-color: $bgSecondary;
+
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
+
+.review-btn{
+
+  &:hover {
+    opacity: 0.7;
+  }
+  &:focus {
+    outline: none;
   }
 }
