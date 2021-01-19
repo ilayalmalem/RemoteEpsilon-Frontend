@@ -39,7 +39,7 @@ export default function Navbar(props) {
 function LongMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const history= useHistory();
-    
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -48,6 +48,7 @@ function LongMenu(props) {
         setAnchorEl(null);
     };
 
+
     return (
         <div>
             <button className="link w-12 outline-none z-0 cursor-pointer h-12 bg-black rounded-full" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}></button>
@@ -55,10 +56,6 @@ function LongMenu(props) {
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
-                anchorEl={anchorEl}
-                getContentAnchorEl={null}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                transformOrigin={{ vertical: "top", horizontal: "center" }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
