@@ -11,7 +11,7 @@ export default function AssignmentsOverdue(props) {
 
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/assignments`)
+        axios.get(`${GlobalsService.baseAPIURL}/assignments/overdue`)
             .then(res => {
                 setAssignments(res.data.data);
             })

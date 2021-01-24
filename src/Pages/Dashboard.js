@@ -1,6 +1,6 @@
 import AuthService from '../services/AuthService';
 import DateService from "../services/DateService";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import '../Styles/dashboard.scss';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -8,14 +8,29 @@ import TodayIcon from '@material-ui/icons/Today';
 import {Tooltip} from "@material-ui/core";
 import GlobalsService from "../services/GlobalsService";
 import {Link} from 'react-router-dom';
+import axios from "axios";
 
 export default function Dashboard() {
     const [date, setDate] = useState(new Date(Date.now()));
+    const [overdueAssignmentsCount, setOverdueAssignmentsCount] = useState(null);
+    const [overdueAssignments, setOverdueAssignments] = useState([]);
 
     setInterval(() => {
         setDate(() => new Date(Date.now()))
 
     }, GlobalsService.settings.clockTickRate)
+
+    useEffect(() => {
+        axios.get(`${GlobalsService.baseAPIURL}/assignments/overdue`)
+            .then(res => {
+                const data = res.data.data.slice(0, 2);
+                setOverdueAssignmentsCount(res.data.count);
+                const unique = [...new Map(data.map(item =>
+                    [item['email'], item])).values()];
+
+                setOverdueAssignments(unique)
+            })
+    }, [])
 
     const user = AuthService.getUser();
     return (
@@ -35,14 +50,14 @@ export default function Dashboard() {
                     <div className="assignments-overdue flex p-6 w-full h-3/6">
                         <div className="left-side flex flex-col w-1/2 h-full">
                             <div className="title font-semibold text-xl">מטלות באיחור</div>
-                            <div className="by text-lg">מנחמה יעיש, רועי ברכה ועוד.</div>
+                            <div className="by text-lg">מ{overdueAssignments && overdueAssignments.map((assignment, index) => `${assignment.user.email}`) } ועוד.</div>
                             <Link className="mt-auto w-1/2 mb-0" to="/assignments/overdue">
                                 <button className="review-btn w-full py-2 outline-none text-white rounded-full">צפה</button>
                             </Link>
                         </div>
 
                         <div className="right-side w-3/12 mr-auto h-full flex justify-center items-center">
-                            <div className="assignment-count font-normal text-red-400 text-4xl">7</div>
+                            <div className="assignment-count font-normal text-red-400 text-4xl">{overdueAssignmentsCount}</div>
                         </div>
                     </div>
 
