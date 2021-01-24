@@ -1,6 +1,6 @@
 import illustration from "../assets/main_illustration.svg";
 
-export default function HomePage(props) {
+export default function HomePage() {
     return (
         <div className="home-page flex flex-col items-center text-black">
             <div className="content-wrapper flex h-full md:h-full w-full items-center lg:items-start">
@@ -13,10 +13,10 @@ export default function HomePage(props) {
                     </div>
 
                     <button onClick={() => {
-                        props.scrollTo.current.scrollIntoView({
-                            behavior: "smooth"
-                        })
-                    }} id="cta" className="w-full mt-8 md:w-1/4">התחילו
+                        // props.scrollTo.current.scrollIntoView({
+                        //     behavior: "smooth"
+                        // })
+                    }} className="w-full mt-8 md:w-1/4 cta">התחילו
                     </button>
                 </div>
 

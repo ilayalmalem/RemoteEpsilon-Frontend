@@ -2,7 +2,7 @@ import axios from "axios";
 
 const AuthService = {
   isAuthenticated: () => {
-    return localStorage.getItem('remote_epsilon_is_auth') == 'true' ? true : false;
+    return localStorage.getItem('remote_epsilon_access_token') !== null;
   },
   authenticate: async (user) => {
     const { id, password } = user;
@@ -37,6 +37,9 @@ const AuthService = {
     localStorage.removeItem('remote_epsilon_user');
     localStorage.setItem('remote_epsilon_is_auth', 'false')
     localStorage.removeItem('remote_epsilon_access_token')
+  },
+  authToken: () => {
+    return localStorage.getItem('remote_epsilon_access_token');
   }
 };
 
