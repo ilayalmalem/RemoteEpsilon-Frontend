@@ -30,7 +30,7 @@ export default function Menu(props) {
                     <MenuItem onClick={handleClose}>החשבון שלי</MenuItem>
                 </Link>
                 {props.isMobile ?
-                    <>
+                    <div>
                         <Link to="/storage">
                             <MenuItem onClick={handleClose}>אחסון</MenuItem>
                         </Link>
@@ -42,7 +42,7 @@ export default function Menu(props) {
                         <Link to="/myclass">
                             <MenuItem onClick={handleClose}>הכיתה שלי</MenuItem>
                         </Link>
-                    </>
+                    </div>
                     :""}
 
                 <div onClick={() => {

@@ -26,7 +26,7 @@ export default function AssignmentsOverdue(props) {
             <div className="assignments w-full flex-wrap h-full flex justify-between">
                 {(assignments && assignments.map) ? assignments.map(assignment => {
                     return (
-                        <div className="w-full lg:w-5/12 flex justify-between border-2 mb-10 shadow-md" style={{height: '40%'}}>
+                        <div key={assignment.id} className="w-full lg:w-5/12 flex justify-between border-2 mb-10 shadow-md" style={{height: '40%'}}>
                             <div className="left p-5 w-7/12 h-full flex flex-col">
                                 <div className="title mb-2 text-lg font-semibold">
                                     {assignment.title}
