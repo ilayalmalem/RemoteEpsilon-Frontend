@@ -36,7 +36,7 @@ export default function AssignmentsOverdue(props) {
                                     {assignment.classroom.name}
                                 </div>
                                 <div>
-                                    <span className="font-bold">{TranslationService.get('assignment')}</span> מ{assignment.owner.email}
+                                    <span className="font-bold">{TranslationService.get('assignment')}</span> מ{assignment.user.email}
                                 </div>
                                 <div className="bottom-section mt-auto flex flex-col">
                                     <Link to={"/assignment/" + assignment.id}>
