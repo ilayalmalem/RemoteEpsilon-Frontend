@@ -11,25 +11,35 @@ export default function Navbar(props) {
                 <Link className="no-underline" to="/">
                     <div className="logo text-lg md:text-xl font-semibold">RemoteEpsilon</div>
                 </Link>
-                <div className="flex justify-center sm:justify-start md:hidden">
-                    <Link className="link text-sm md:text-base text-red-400 rounded-full text-white"
-                          to="/login">התחברות</Link>
-                </div>
-                {props.loggedIn ?
-                    <ul className="hidden md:flex link-list flex items-center">
-                        <Link className="link" to="/storage">אחסון</Link>
-                        <Link className="link" to="/assignments">מטלות</Link>
-                        <Link className="link" to="/myclass">הכיתה שלי</Link>
-                        <LongMenu className="link" setLogged={props.setLoggedIn} />
-                    </ul>
-                    :
-                    <ul className="hidden md:flex link-list flex items-center">
-                        <Link className="link" to="/teachers">למורים</Link>
-                        <Link className="link" to="/students">לתלמידים</Link>
-                        <Link className="link" to="/about">אודות</Link>
-                        <Link className="link link-main rounded-full text-white" to="/login">התחברות</Link>
-                    </ul>
 
+                {props.loggedIn ?
+                    <>
+                        <ul className="hidden md:flex link-list flex items-center">
+                            <Link className="link" to="/storage">אחסון</Link>
+                            <Link className="link" to="/assignments">מטלות</Link>
+                            <Link className="link" to="/myclass">הכיתה שלי</Link>
+                            <LongMenu className="link" setLogged={props.setLoggedIn} />
+                        </ul>
+                        <ul className="flex md:hidden link-list flex items-center">
+                            {/*<Link className="link" to="/storage">אחסון</Link>*/}
+                            {/*<Link className="link" to="/assignments">מטלות</Link>*/}
+                            {/*<Link className="link" to="/myclass">הכיתה שלי</Link>*/}
+                            <LongMenu className="link" isMobile={true} setLogged={props.setLoggedIn} />
+                        </ul>
+                    </>
+                    :
+                    <>
+                        <ul className="hidden md:flex link-list flex items-center">
+                            <Link className="link" to="/teachers">למורים</Link>
+                            <Link className="link" to="/students">לתלמידים</Link>
+                            <Link className="link" to="/about">אודות</Link>
+                            <Link className="link link-main rounded-full text-white" to="/login">התחברות</Link>
+                        </ul>
+                        <div className="flex justify-center sm:justify-start md:hidden">
+                            <Link className="link text-sm md:text-base text-red-400 rounded-full text-white"
+                            to="/login">התחברות</Link>
+                        </div>
+                    </>
                 }
             </div>
         </nav>
@@ -62,6 +72,22 @@ function LongMenu(props) {
                 <Link to="/profile">
                     <MenuItem onClick={handleClose}>החשבון שלי</MenuItem>
                 </Link>
+                {props.isMobile ?
+                    <>
+                        <Link to="/storage">
+                            <MenuItem onClick={handleClose}>אחסון</MenuItem>
+                        </Link>
+
+                        <Link to="/assignments">
+                            <MenuItem onClick={handleClose}>מטלות</MenuItem>
+                        </Link>
+
+                        <Link to="/myclass">
+                            <MenuItem onClick={handleClose}>הכיתה שלי</MenuItem>
+                        </Link>
+                    </>
+                :""}
+
                 <div onClick={() => {
                      AuthService.logout();
                      props.setLogged(false);

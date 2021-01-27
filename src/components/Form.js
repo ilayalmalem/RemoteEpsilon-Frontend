@@ -47,14 +47,9 @@ function Form(props) {
     const handleSubmit = async (e, id, password) => {
         e.preventDefault();
 
-        // This in production will be replaced to an api call to fetch user data to be stored
         const user = {
-            // name: 'עילאי דוד אלמלם',
             id: id,
             password: password,
-            // email: 'ilayalmalem@gmail.com',
-            // phone: '0504841222',
-            // role: 'student'
         };
 
         const authorized = await AuthService.authenticate(user)

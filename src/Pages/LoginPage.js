@@ -16,7 +16,7 @@ function LoginPage(props) {
         <ThemeProvider theme={isRtl ? rtlTheme : ltrTheme}>
             <div dir={isRtl ? 'rtl' : 'ltr'} className="wrapper flex justify-center w-full" dir="ltr">
                 <div
-                    className="flex bg-white shadow-xl flex-col justify-start border-2 w-full md:w-8/12 lg:w-6/12 xl:w-3/12 p-6">
+                    className="flex bg-white shadow-xl flex-col justify-start border-2 w-full md:w-5/12 xl:w-3/12 p-6">
                     <div className="logo flex lg:mb-auto justify-center">
                         <img src={logo} className="w-2/12"/>
                     </div>
