@@ -1,7 +1,6 @@
 import AuthService from '../services/AuthService';
 import DateService from "../services/DateService";
 import {useEffect, useState} from "react";
-import '../Styles/dashboard.scss';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DescriptionIcon from '@material-ui/icons/Description';
 import TodayIcon from '@material-ui/icons/Today';

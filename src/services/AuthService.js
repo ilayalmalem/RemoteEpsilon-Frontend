@@ -15,6 +15,7 @@ const AuthService = {
       localStorage.setItem('remote_epsilon_is_auth', 'true');
       localStorage.setItem('remote_epsilon_user', JSON.stringify(r.data.user))
       localStorage.setItem('remote_epsilon_access_token', r.data.token)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${AuthService.authToken()}`;
       response = {
         state: true,
       }

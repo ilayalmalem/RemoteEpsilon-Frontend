@@ -3,7 +3,7 @@ import {IconButton, InputAdornment, TextField, Tooltip, withStyles} from "@mater
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
-
+import '../Styles/form.css';
 const styles = theme => ({
     notchedOutline: {
         '& .MuiOutlinedInput-root': {

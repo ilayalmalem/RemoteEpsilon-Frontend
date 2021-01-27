@@ -9,7 +9,4 @@ const Globals = {
     }
 }
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${AuthService.authToken()}`;
-
-
 export default Globals;
