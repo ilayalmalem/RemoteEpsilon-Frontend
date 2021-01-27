@@ -1,4 +1,3 @@
-import './App.css';
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,7 +7,7 @@ import {
 import './Styles/main.scss';
 import Navbar from "./components/Navbar";
 import HomePage from "./Pages/HomePage";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import AuthService from "./services/AuthService";

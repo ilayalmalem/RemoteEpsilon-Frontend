@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import {useState} from "react";
-import '../Styles/authentication.scss';
 import '../Styles/registerPage.css';
 
 

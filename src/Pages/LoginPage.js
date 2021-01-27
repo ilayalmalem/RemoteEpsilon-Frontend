@@ -2,7 +2,6 @@ import {
     createMuiTheme,
     ThemeProvider,
 } from '@material-ui/core';
-import '../Styles/authentication.scss';
 import logo from '../assets/logo.svg';
 import Globals from "../services/GlobalsService";
 import Form from "../components/Form";

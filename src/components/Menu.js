@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {Menu, MenuItem} from "@material-ui/core";
+import {Menu as MUIMenu, MenuItem} from "@material-ui/core";
 import AuthService from "../services/AuthService";
 
 export default function Menu(props) {
@@ -19,7 +19,7 @@ export default function Menu(props) {
     return (
         <div>
             <button className="link w-12 outline-none z-0 cursor-pointer h-12 bg-black rounded-full" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}></button>
-            <Menu
+            <MUIMenu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
@@ -52,7 +52,7 @@ export default function Menu(props) {
                 }}>
                     <MenuItem onClick={handleClose}>התנתק</MenuItem>
                 </div>
-            </Menu>
+            </MUIMenu>
         </div>
     );
 }
