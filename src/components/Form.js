@@ -53,11 +53,10 @@ function Form(props) {
         };
 
         const authorized = await AuthService.authenticate(user)
-                console.log(authorized)
                 if(authorized.state == true) {
                     props.setLoggedIn(true);
                     history.push({
-                        pathname: '/dashboard',
+                        pathname: authorized.user.role == "student" ?  '/dashboard' : '/teachers',
                         state: {
                             user: user
                         }
@@ -148,7 +147,7 @@ function Form(props) {
                        onChange={() => setRememberMe(!rememberMe)} checked={rememberMe}/><span
                 className={(appDir == 'rtl' ? 'mr-2' : 'ml-2 ') + " text-black text-sm"}>זכור אותי</span>
             </label>
-            {/*</div>*/}
+
 
             <button disabled={(id.length != 9 || password.length <= 4) ? true : false}
                     onClick={e => handleSubmit(e, id, password)}

@@ -1,7 +1,7 @@
 import AuthService from "./AuthService";
 import axios from "axios";
 
-const Globals = {
+const GlobalsService = {
     baseAPIURL: 'http://127.0.0.1:8000/api',
     settings: {
         isRtl: true,
@@ -11,4 +11,4 @@ const Globals = {
 
 axios.defaults.headers.common['Authorization'] = `Bearer ${AuthService.authToken()}`;
 
-export default Globals;
+export default GlobalsService;

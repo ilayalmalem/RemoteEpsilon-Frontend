@@ -98,9 +98,22 @@ $bgPrimary: #FF5791;
   border-radius: 99999px;
   color: white;
   border: none;
-  font-size: 14px;
   outline: none;
 
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
+
+.main_button {
+  background-color: #FF5791;
+  padding: 8px;
+  color: white;
+  font-size: 16px;
+  &:focus {
+    outline: none;
+  }
   &:hover {
     opacity: 0.8;
     cursor: pointer;

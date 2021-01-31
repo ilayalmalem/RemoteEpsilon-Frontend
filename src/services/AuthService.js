@@ -18,6 +18,7 @@ const AuthService = {
       axios.defaults.headers.common['Authorization'] = `Bearer ${r.data.token}`;
       response = {
         state: true,
+        user: r.data.user
       }
     }).catch(err => {
         response = {
