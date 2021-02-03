@@ -15,12 +15,23 @@ import AssignmentsOverdue from "./Pages/AssignmentsOverdue";
 import AssignmentPage from "./Pages/AssignmentPage";
 import TeachersDashboard from "./Pages/TeachersDashboard";
 import Assignments from "./Pages/Assignments";
-import Globals from "./services/GlobalsService";
 import GlobalsService from "./services/GlobalsService";
 import AddAssignment from "./Pages/AddAssignment";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
+
+
+    if ('deviceMemory' in navigator) {
+        const deviceMemory = navigator.deviceMemory;
+        if(deviceMemory < 1 || navigator.hardwareConcurrency < 2) {
+            const confirmed = window.confirm('Your device seems weak. activate lite mode?')
+            if(confirmed) {
+                // activate lite mode
+            }
+        }
+    }
+
     return (
         <Router>
             <div id="main"  className={"w-full h-screen"} style={{background: (loggedIn ? ' white' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>

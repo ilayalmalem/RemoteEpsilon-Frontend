@@ -1,6 +1,6 @@
 import {createMuiTheme, TextField, ThemeProvider, withStyles} from "@material-ui/core";
 import GlobalsService from "../services/GlobalsService";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 
@@ -30,7 +30,7 @@ const styles = theme => ({
         borderColor: "red"
     }
 })
-
+var files = [];
 function AddAssignment(props) {
     const appDir = GlobalsService.settings.isRtl ? 'rtl' : 'ltr';
     const ltrTheme = createMuiTheme({ direction: "ltr" });
@@ -45,16 +45,28 @@ function AddAssignment(props) {
     const [descriptionErrors, setDescriptionErrors] = useState(null);
     const [dateErrors, setDateErrors] = useState(null);
     const history = useHistory();
+    const [files, setFiles] = useState();
 
     const upload = () => {
-        const data = {
+        const raw_data = {
             title: name,
             description: description,
             classroom_id: parseInt(toClass),
-            until_date: date
+            until_date: date,
+            files: files[0]
+        };
+
+        const data = new FormData();
+
+        for (const key in raw_data ) {
+            data.append(key, raw_data[key]);
         }
 
-        axios.post(`${GlobalsService.baseAPIURL}/assignments/create`, data)
+        for (const file of files) {
+            data.append("files[]", file);
+        }
+
+        axios.post(`${GlobalsService.baseAPIURL}/assignments/create`, data, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(res => {
                 console.log(res.data);
                 setTitleErrors(null);
@@ -73,7 +85,7 @@ function AddAssignment(props) {
 
     return (
         <ThemeProvider theme={GlobalsService.settings.isRtl ? rtlTheme : ltrTheme}>
-            <div isRtl={appDir} className="flex flex-col h-full justify-between">
+            <form isRtl={appDir} encType="multipart/form-data" className="flex flex-col h-full justify-between">
                 <label className="font-bold text-xl" htmlFor="input1">יצירת מטלה</label>
                 <TextField
                     variant="outlined"
@@ -156,9 +168,11 @@ function AddAssignment(props) {
                         shrink: true,
                     }}
                 />
+                {/*<MyDropzone />*/}
+                <input type="file" onChange={e => setFiles(e.target.files)} id="files" name="files[]"  multiple />
                 <div className="text-red-500">{dateErrors}</div>
-                <button className="w-full main_button" onClick={upload}>צור</button>
-            </div>
+                <button className="w-full main_button" type="button" onClick={upload}>צור</button>
+            </form>
         </ThemeProvider>
     );
 }

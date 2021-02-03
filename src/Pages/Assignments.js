@@ -4,19 +4,32 @@ import axios from "axios";
 import GlobalsService from "../services/GlobalsService";
 import TranslationService from "../services/TranslationService";
 import {Link} from "react-router-dom";
+import AssignmentShow from "../components/AssignmentShow";
 
 
 export default function Assignments(props) {
     const user = AuthService.getUser();
 
-    return user.role == 'student' ? <ForStudents user={user} /> : <ForTeachers user={user} />;
+    return user.role == 'student' ? <ForStudents user={user}/> : <ForTeachers user={user}/>;
 };
 
-function ForStudents(props) {
-    const {user} = props;
+function ForStudents() {
+    const [assignments, setAssignments] = useState();
+
+    useEffect(() => {
+        axios.get(`${GlobalsService.baseAPIURL}/assignments/all`)
+            .then(r => {
+                setAssignments(r.data)
+            });
+    }, [])
+
     return (
-        <div>
-            For students
+        <div className="w-full h-full">
+            <p className="font-bold text-2xl">
+                מטלות
+            </p>
+            <br/>
+            <AssignmentShow assignments={(assignments && assignments.data) ? assignments.data : {}}/>
         </div>
     )
 }
