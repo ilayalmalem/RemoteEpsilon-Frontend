@@ -3,6 +3,7 @@ import GlobalsService from "../services/GlobalsService";
 import {useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import FileDropzone from "../components/FileDropzone";
 
 const styles = theme => ({
     notchedOutline: {
@@ -30,7 +31,7 @@ const styles = theme => ({
         borderColor: "red"
     }
 })
-var files = [];
+
 function AddAssignment(props) {
     const appDir = GlobalsService.settings.isRtl ? 'rtl' : 'ltr';
     const ltrTheme = createMuiTheme({ direction: "ltr" });
@@ -53,7 +54,6 @@ function AddAssignment(props) {
             description: description,
             classroom_id: parseInt(toClass),
             until_date: date,
-            files: files[0]
         };
 
         const data = new FormData();
@@ -168,9 +168,9 @@ function AddAssignment(props) {
                         shrink: true,
                     }}
                 />
-                {/*<MyDropzone />*/}
-                <input type="file" onChange={e => setFiles(e.target.files)} id="files" name="files[]"  multiple />
+
                 <div className="text-red-500">{dateErrors}</div>
+                <FileDropzone setFiles={setFiles} />
                 <button className="w-full main_button" type="button" onClick={upload}>צור</button>
             </form>
         </ThemeProvider>
