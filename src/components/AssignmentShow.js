@@ -23,8 +23,8 @@ export default function AssignmentShow(props) {
                                     className="font-bold">{TranslationService.get('assignment')}</span> מ{assignment.user.email}
                             </div>
                             <div className="bottom-section mt-auto flex flex-col">
-                                <Link to={"/assignment/" + assignment.id}>
-                                    <div className="cta-sm w-1/3 text-center">צפה</div>
+                                <Link className="w-1/3" to={"/assignment/" + assignment.id}>
+                                    <div className="cta-sm text-center">צפה</div>
                                 </Link>
                             </div>
                         </div>

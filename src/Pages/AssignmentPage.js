@@ -13,6 +13,7 @@ export default function AssignmentPage() {
         axios.get(`${GlobalsService.baseAPIURL}/assignment/${id}`)
             .then(res => {
                 setAssignment(res.data)
+                console.log(res.data)
             })
             .catch(err => {
                 setError('Not authorized')
@@ -21,19 +22,36 @@ export default function AssignmentPage() {
 
     }, [])
 
+    function downloadAll(assets) {
+        assets.forEach(asset => {
+            window.open(`${GlobalsService.baseAPIURL}/download/${asset.id}`);
+        })
+    }
+
     return (
         <>
             {error ? (
                 <div>{TranslationService.get('You are not authorized to access this assignment.')}</div>
             ) : assignment && (
-                <div className="top-bar flex items-center justify-between w-full">
-                    <div className="title font-bold text-xl">
-                        {assignment.title}
+                <>
+                    <div className="top-bar flex items-center justify-between w-full">
+                        <div className="title font-bold text-xl">
+                            {assignment.title}
+                        </div>
+                        <div>
+                            <span className="font-semibold">{TranslationService.get('assignment')}</span> מ{assignment.user.email}
+                        </div>
                     </div>
-                    <div>
-                        <span className="font-semibold">{TranslationService.get('assignment')}</span> מ{assignment.user.email}
+                    <div className="files flex w-full">
+                        <a href="#" target="_blank" onClick={e => {
+                            e.preventDefault();
+                            downloadAll(assignment.assets)
+                        }}>all</a>
+                        {assignment.assets.map((file) => (
+                            <a target="_blank" key={file.path} href={`${GlobalsService.baseAPIURL}/download/${file.id}`}>{file.name}</a>
+                        ))}
                     </div>
-                </div>
+                </>
             )}
         </>
     )
