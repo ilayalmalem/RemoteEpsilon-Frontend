@@ -23,9 +23,6 @@ export default function TeachersDashboard(props) {
                     {date.getUTCDate()} ב{DateService.toMonth(date.getUTCMonth())}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
                 </div>
             </div>
-
-            .
-
         </div>
     )
 

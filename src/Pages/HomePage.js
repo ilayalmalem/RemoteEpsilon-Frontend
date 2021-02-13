@@ -1,12 +1,13 @@
+import { withNamespaces } from "react-i18next";
 import illustration from "../assets/main_illustration.svg";
 
-export default function HomePage() {
+function HomePage({t}) {
     return (
         <div className="home-page flex flex-col items-center text-black">
             <div className="content-wrapper flex h-full md:h-full w-full items-center lg:items-start">
                 <div className="left-content justify-center h-4/6 flex flex-col w-full md:w-1/2">
                     <div id="headline">
-                        הכירו סוג חדש של למידה מרחוק.
+                        {t('homepage.title')}
                     </div>
                     <div id="subheadline" className="w-full md:w-7/12">
                         בואו לחוות סוג חדש של למידה מרחוק. כל הכלים הדרושים במקום אחד, בכל זמן, מכל מקום במקסימום נוחות.
@@ -28,3 +29,5 @@ export default function HomePage() {
         </div>
     )
 }
+
+export default withNamespaces()(HomePage);

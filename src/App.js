@@ -17,6 +17,7 @@ import TeachersDashboard from "./Pages/TeachersDashboard";
 import Assignments from "./Pages/Assignments";
 import GlobalsService from "./services/GlobalsService";
 import AddAssignment from "./Pages/AddAssignment";
+import { withNamespaces } from "react-i18next";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
@@ -81,7 +82,7 @@ function App() {
     );
 }
 
-export default App;
+export default withNamespaces()(App);
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

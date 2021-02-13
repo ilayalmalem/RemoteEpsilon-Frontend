@@ -9,6 +9,7 @@ import {
     jssPreset
 } from "@material-ui/core/styles";
 import { create } from "jss";
+import './i18n';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
