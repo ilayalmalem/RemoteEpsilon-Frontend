@@ -4,6 +4,7 @@ import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
 import '../Styles/form.css';
+import { withNamespaces } from "react-i18next";
 const styles = theme => ({
     notchedOutline: {
         '& .MuiOutlinedInput-root': {
@@ -33,6 +34,7 @@ const styles = theme => ({
 
 
 function Form(props) {
+    const {t} = props;
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
@@ -46,7 +48,6 @@ function Form(props) {
 
     const handleSubmit = async (e, id, password) => {
         e.preventDefault();
-
         const user = {
             id: id,
             password: password,
@@ -75,7 +76,7 @@ function Form(props) {
     const {classes} = props;
     return (
         <form className={classes.root}>
-            <Tooltip title="מספרים בלבד , 9 ספרות." placement="right" aria-label="add">
+            <Tooltip title={t('login.idMsg')} placement="right" aria-label="add">
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -88,7 +89,7 @@ function Form(props) {
                     className={classes.textField}
                     onChange={e => setId(e.target.value)}
                     value={id}
-                    label="תעודת זהות"
+                    label={t('login.id')}
                     InputLabelProps={{
                         style: {
                             color: '#000',
@@ -109,7 +110,7 @@ function Form(props) {
                 fullWidth
                 variant="outlined"
                 className={classes.textField}
-                label="סיסמה"
+                label={t('login.password')}
                 InputLabelProps={{
                     style: {color: '#000'},
                 }}
@@ -145,18 +146,19 @@ function Form(props) {
             <label dir={appDir} className="inline-flex items-center mt-5 w-full">
                 <input type="checkbox" className="form-checkbox h-5 w-5"
                        onChange={() => setRememberMe(!rememberMe)} checked={rememberMe}/><span
-                className={(appDir == 'rtl' ? 'mr-2' : 'ml-2 ') + " text-black text-sm"}>זכור אותי</span>
+                className={(appDir == 'rtl' ? 'mr-2' : 'ml-2 ') + " text-black text-sm"}>{t('login.rememberMe')}</span>
             </label>
 
 
             <button disabled={(id.length != 9 || password.length <= 4) ? true : false}
                     onClick={e => handleSubmit(e, id, password)}
                     className={"w-full outline-none bg-red-400 mt-4 h-10 text-white" +
-                    "" + ((id.length != 9 || password.length <= 4) ? ' opacity-50' : ' opacity-100')}>התחבר
+                    "" + ((id.length != 9 || password.length <= 4) ? ' opacity-50' : ' opacity-100')}>{t('login.login')}
             </button>
 
         </form>
     )
 }
 
-export default withStyles(styles)(Form);
+const component = withNamespaces()(Form)
+export default withStyles(styles)(component);

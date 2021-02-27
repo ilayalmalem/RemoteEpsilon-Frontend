@@ -6,7 +6,7 @@ import AuthService from "../services/AuthService";
 export default function Menu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const history= useHistory();
-
+    const {styledWith} = props;
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -18,7 +18,7 @@ export default function Menu(props) {
 
     return (
         <div>
-            <button className="link w-12 outline-none z-0 cursor-pointer h-12 bg-black rounded-full" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}></button>
+            <button style={styledWith} className="link w-12 outline-none z-0 cursor-pointer h-12 bg-black rounded-full" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}></button>
             <MUIMenu
                 id="simple-menu"
                 anchorEl={anchorEl}

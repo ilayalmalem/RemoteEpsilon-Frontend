@@ -18,11 +18,11 @@ const DateService = {
     },
     getGreeting: (hours) => {
         let msg;
-        if(hours > 4) msg = 'בוקר מוקדם שמח'
-        if(hours > 6) msg = 'בוקר טוב'
-        if(hours > 12) msg = 'צהריים טובים'
-        if(hours > 17) msg = 'ערב טוב'
-        if(hours > 22) msg = 'לילה טוב'
+        if(hours > 4) msg = 'preMor'
+        if(hours > 6) msg = 'mor'
+        if(hours > 12) msg = 'noon'
+        if(hours > 17) msg = 'eve'
+        if(hours > 22) msg = 'night'
         return msg;
     }
 }

@@ -13,53 +13,10 @@ $bgPrimary: #FF5791;
   background: linear-gradient(to bottom right, #B9FCFF, #fff);
 }
 
-
-.navbar-wrapper {
-  height: 20vh;
-  width: 100vw;
-}
-
 .app {
-  height: 80vh;
+  // height: ;
   width: 100vw;
 }
-
-.content {
-  height: 100%;
-  padding: 28px 2.5rem;
-}
-
-.home-page {
-  height: 100%;
-}
-
-.navbar {
-  padding: 45px 0px;
-  width: 100%;
-}
-
-
-.link {
-  font-weight: 300;
-  text-decoration: none;
-  margin-right: 80px;
-  transition-duration: 500ms;
-  transition: font-weight ease-out;
-
-  &:hover {
-    font-weight: 500;
-    transition-duration: 500ms;
-  }
-  &:focus {
-    outline: none;
-  }
-}
-
-  .link.link-main {
-    background-color: #FF5791;
-    padding: 14px;
-    font-weight: 500;
-  }
 
 
 #headline {
@@ -120,18 +77,12 @@ $bgPrimary: #FF5791;
   }
 }
 
-.assignments-overdue {
-  background-color: $bgSecondary;
+.title {
+  color: $textImportant;
+}
 
-  .left-side {
-    .title {
-      color: $textImportant;
-    }
-
-    .review-btn {
-      background-color: $bgPrimary;
-    }
-  }
+.review-btn {
+  background-color: $bgPrimary;
 }
 
 .shortcut-block {
@@ -145,7 +96,6 @@ $bgPrimary: #FF5791;
 }
 
 .review-btn{
-
   &:hover {
     opacity: 0.7;
   }

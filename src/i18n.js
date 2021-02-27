@@ -3,6 +3,7 @@ import { reactI18nextModule } from "react-i18next";
 
 import translationEN from './locales/en/translation.json';
 import translationHE from './locales/he/translation.json';
+import GlobalsService from "./services/GlobalsService";
 
 // the translations
 const resources = {
@@ -18,7 +19,7 @@ i18n
   .use(reactI18nextModule)
   .init({
     resources,
-    lng: "he",
+    lng: GlobalsService.settings.lng,
     fallbackLng: "he",
     interpolation: {
       escapeValue: false

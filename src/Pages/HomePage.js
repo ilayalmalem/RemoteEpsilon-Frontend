@@ -10,14 +10,14 @@ function HomePage({t}) {
                         {t('homepage.title')}
                     </div>
                     <div id="subheadline" className="w-full md:w-7/12">
-                        בואו לחוות סוג חדש של למידה מרחוק. כל הכלים הדרושים במקום אחד, בכל זמן, מכל מקום במקסימום נוחות.
+                        {t('homepage.subtitle')}
                     </div>
 
                     <button onClick={() => {
                         // props.scrollTo.current.scrollIntoView({
                         //     behavior: "smooth"
                         // })
-                    }} className="w-full mt-8 md:w-1/4 cta">התחילו
+                    }} className="w-full mt-8 md:w-1/4 cta">{t('homepage.cta')}
                     </button>
                 </div>
 

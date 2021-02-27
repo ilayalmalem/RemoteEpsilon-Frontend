@@ -18,6 +18,8 @@ import Assignments from "./Pages/Assignments";
 import GlobalsService from "./services/GlobalsService";
 import AddAssignment from "./Pages/AddAssignment";
 import { withNamespaces } from "react-i18next";
+import Schedule from "./Pages/Schedule";
+import AttendanceCheck from "./Pages/AttendanceCheck";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
@@ -35,13 +37,13 @@ function App() {
 
     return (
         <Router>
-            <div id="main"  className={"w-full h-screen"} style={{background: (loggedIn ? ' white' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>
-                <div className={"navbar-wrapper flex items-center sticky top-0" + (loggedIn ? ' shadow-none' : '')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
+            <div id="main"  className={"w-full min-h-screen flex"} style={{background: (loggedIn ? ' #F1F4F9' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>
+                <div className={"navbar h-screen w-1/4" + (loggedIn ? ' shadow-none' : '')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
                     <Navbar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
                 </div>
 
-                <div className="app">
-                    <div className="content px-10 md:px-20">
+                <div className="app overflow-scroll min-h-screen">
+                    <div className="content h-full w-full px-10 md:px-20 pt-20">
                         <Switch>
                             <PrivateRoute path="/dashboard/" component={Dashboard} />
                             <PrivateRoute path="/assignments/add" component={AddAssignment} />
@@ -49,6 +51,8 @@ function App() {
                             <PrivateRoute path="/assignment/:id" component={AssignmentPage} />
                             <PrivateRoute path="/teachers" component={TeachersDashboard} />
                             <PrivateRoute path="/assignments" component={Assignments} />
+                            <PrivateRoute path="/schedule" component={Schedule} />
+                            <PrivateRoute path="/attendance-check" component={AttendanceCheck} />
 
 
                             <Route path="/teachers" exact>
@@ -85,10 +89,11 @@ function App() {
 export default withNamespaces()(App);
 
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, middleware, ...rest }) => {
 
     const isLoggedIn = AuthService.isAuthenticated();
-
+    // Middleware here
+    
     return (
         <Route
             exact
