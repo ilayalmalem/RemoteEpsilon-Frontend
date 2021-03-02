@@ -37,13 +37,13 @@ function App() {
 
     return (
         <Router>
-            <div id="main"  className={"w-full min-h-screen flex"} style={{background: (loggedIn ? ' #F1F4F9' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>
-                <div className={"navbar h-screen w-1/4" + (loggedIn ? ' shadow-none' : '')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
+            <div id="main"  className={"w-full min-h-screen " + (loggedIn ? 'flex': '')} style={{background: (loggedIn ? ' #F1F4F9' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>
+                <div className={"navbar " + (loggedIn ? 'h-screen w-1/4 shadow-none' : 'h-1/12 w-full ')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
                     <Navbar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
                 </div>
 
-                <div className="app overflow-scroll min-h-screen">
-                    <div className="content h-full w-full px-10 md:px-20 pt-20">
+                <div className="app overflow-scroll min-h-full">
+                    <div className="content h-full w-full px-10 md:px-20 pt-16">
                         <Switch>
                             <PrivateRoute path="/dashboard/" component={Dashboard} />
                             <PrivateRoute path="/assignments/add" component={AddAssignment} />

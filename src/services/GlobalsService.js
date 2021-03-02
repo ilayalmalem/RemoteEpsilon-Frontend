@@ -4,9 +4,9 @@ import AuthService from "./AuthService";
 const GlobalsService = {
     baseAPIURL: 'http://127.0.0.1:8000/api',
     settings: {
-        isRtl: false,
+        isRtl: true,
         clockTickRate: 10000,
-        lng: "en"
+        lng: "he"
     }
 }
 

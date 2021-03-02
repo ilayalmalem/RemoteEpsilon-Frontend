@@ -41,7 +41,7 @@ function Dashboard({t}) {
                 </div>
 
                 <div className="date hidden md:block font-normal">
-                    {date.getUTCDate()} ב{t(`months.${date.getUTCMonth()}`)}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
+                    {date.getUTCDate()} {t('months.of')}{t(`months.${date.getUTCMonth()}`)}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
                 </div>
             </div>
 
@@ -49,18 +49,18 @@ function Dashboard({t}) {
 
                 <div className="right-side w-1/2 h-full">
                     <div className="w-11/12 p-6 rounded-lg flex h-1/3 bg-white shadow-xl">
-                        <div className="left w-1/2 h-full flex flex-col justify-between">
+                        <div className="left w-9/12 h-full flex flex-col justify-between">
                             <div>
                                 <p className="font-semibold text-red-400">
                                     {t('dashboard.assignmentsOverdue')}
                                 </p>
-                                <p className="text-sm">
+                                <p className="text-sm w-3/4">
                                     {t('dashboard.from')}{overdueAssignments && overdueAssignments.map((assignment, index) => `${assignment.user.email}`) } {t('dashboard.andMore')}
                                 </p>
                             </div>
 
                             <Link className="mt-auto w-1/2 mb-0" to="/assignments/overdue">
-                                <button className="review-btn w-full py-2 outline-none text-white rounded-full">{t('dashboard.review')}</button>
+                                <button className="review-btn w-full text-sm py-2 outline-none text-white rounded-full">{t('dashboard.review')}</button>
                             </Link>
                         </div>
 
@@ -70,6 +70,33 @@ function Dashboard({t}) {
                             </div>
                         </div>
                     </div>
+
+                    <div className="w-11/12 p-6 h-1/4 bg-white shadow-xl rounded-lg mt-6">
+                        <div className="left">
+                            <p className="font-bold">
+                                Storage Pool
+                            </p>
+
+                            <p className="text-sm">
+                                0.9GB/10GB
+                            </p>
+                        </div>
+
+                        <div className="right"></div>
+
+                    </div>
+
+                    <div className="w-11/12 h-1/5 p-6 bg-white shadow-xl rounded-lg mt-6">
+                        <div className="left">
+                            <p className="font-bold">
+                                75 new messages
+                            </p>
+                            <div className="text-sm">
+                                From 7 chats
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
