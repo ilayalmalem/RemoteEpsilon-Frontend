@@ -28,7 +28,8 @@
         "from": "from ",
         "andMore": "and more",
         "assignmentsOverdue": "Assignments overdue",
-        "review": "Review"
+        "review": "Review",
+        "storagePool": "Storage Pool"
     },
     "months": {
         "0": "January",

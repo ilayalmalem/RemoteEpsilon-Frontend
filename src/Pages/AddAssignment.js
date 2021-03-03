@@ -46,7 +46,7 @@ function AddAssignment(props) {
     const [descriptionErrors, setDescriptionErrors] = useState(null);
     const [dateErrors, setDateErrors] = useState(null);
     const history = useHistory();
-    const [files, setFiles] = useState();
+    const [files, setFiles] = useState([]);
 
     const upload = () => {
         const raw_data = {
@@ -61,7 +61,7 @@ function AddAssignment(props) {
         for (const key in raw_data ) {
             data.append(key, raw_data[key]);
         }
-
+        
         for (const file of files) {
             data.append("files[]", file);
         }

@@ -1,24 +1,20 @@
 import AuthService from '../services/AuthService';
 import DateService from "../services/DateService";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import DescriptionIcon from '@material-ui/icons/Description';
 import TodayIcon from '@material-ui/icons/Today';
-import {Tooltip} from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import GlobalsService from "../services/GlobalsService";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { withNamespaces } from 'react-i18next';
+import { Circle } from 'rc-progress';
 
-function Dashboard({t}) {
+function Dashboard({ t }) {
     const [date, setDate] = useState(new Date(Date.now()));
     const [overdueAssignmentsCount, setOverdueAssignmentsCount] = useState(null);
     const [overdueAssignments, setOverdueAssignments] = useState([]);
-
-    setInterval(() => {
-        setDate(() => new Date(Date.now()))
-
-    }, GlobalsService.settings.clockTickRate)
 
     useEffect(() => {
         axios.get(`${GlobalsService.baseAPIURL}/assignments/overdue`)
@@ -30,6 +26,15 @@ function Dashboard({t}) {
 
                 setOverdueAssignments(unique)
             })
+
+        const timer = setInterval(() => {
+            setDate(() => new Date(Date.now()))
+    
+        }, GlobalsService.settings.clockTickRate)
+
+        return () => {
+            clearInterval(timer)
+        }
     }, [])
 
     const user = AuthService.getUser();
@@ -41,7 +46,7 @@ function Dashboard({t}) {
                 </div>
 
                 <div className="date hidden md:block font-normal">
-                    {date.getUTCDate()} {t('months.of')}{t(`months.${date.getUTCMonth()}`)}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
+                    {date.getUTCDate()} {t('months.of')}{t(`months.${date.getUTCMonth()}`)}, {date.getFullYear()} | {date.getHours()}:{('0' + date.getMinutes()).slice(-2)}
                 </div>
             </div>
 
@@ -55,7 +60,7 @@ function Dashboard({t}) {
                                     {t('dashboard.assignmentsOverdue')}
                                 </p>
                                 <p className="text-sm w-3/4">
-                                    {t('dashboard.from')}{overdueAssignments && overdueAssignments.map((assignment, index) => `${assignment.user.email}`) } {t('dashboard.andMore')}
+                                    {t('dashboard.from')}{overdueAssignments && overdueAssignments.map((assignment, index) => `${assignment.user.email}`)} {t('dashboard.andMore')}
                                 </p>
                             </div>
 
@@ -64,17 +69,17 @@ function Dashboard({t}) {
                             </Link>
                         </div>
 
-                        <div className={"right w-3/12 h-full flex justify-center items-center" + (GlobalsService.settings.isRtl ? ' mr-auto': ' ml-auto')}>
+                        <div className={"right w-3/12 h-full flex justify-center items-center" + (GlobalsService.settings.isRtl ? ' mr-auto' : ' ml-auto')}>
                             <div className="title font-semibold text-3xl">
                                 {overdueAssignmentsCount}
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-11/12 p-6 h-1/4 bg-white shadow-xl rounded-lg mt-6">
-                        <div className="left">
+                    <div className="w-11/12 p-6 h-1/4 flex bg-white shadow-xl rounded-lg mt-6">
+                        <div className="left w-1/2">
                             <p className="font-bold">
-                                Storage Pool
+                                {t('dashboard.storagePool')}
                             </p>
 
                             <p className="text-sm">
@@ -82,7 +87,9 @@ function Dashboard({t}) {
                             </p>
                         </div>
 
-                        <div className="right"></div>
+                        <div className="right flex justify-end items-end w-1/2 h-full">
+                            <Circle className="h-full" percent="10.5" strokeWidth="8" strokeColor="#4A00E0" />
+                        </div>
 
                     </div>
 
@@ -100,7 +107,7 @@ function Dashboard({t}) {
                 </div>
             </div>
 
-{/* 
+            {/* 
             <div className="data-flow flex flex-col md:flex-row mt-4 w-full h-full">
                 <div className="left-side flex flex-col h-full w-full md:w-1/2 ">
                     <div className="assignments-overdue flex p-6 w-full h-full">

@@ -1,15 +1,23 @@
 import AuthService from "../services/AuthService";
 import DateService from "../services/DateService";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import GlobalsService from "../services/GlobalsService";
+import { withNamespaces } from "react-i18next";
 
-export default function TeachersDashboard(props) {
+function TeachersDashboard({t}) {
     const [date, setDate] = useState(new Date(Date.now()));
+    
+    
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setDate(() => new Date(Date.now()))
+    
+        }, GlobalsService.settings.clockTickRate)
 
-    setInterval(() => {
-        setDate(() => new Date(Date.now()))
-
-    }, GlobalsService.settings.clockTickRate)
+        return () => {
+            clearInterval(timer)
+        };
+    }, [])
 
     const user = AuthService.getUser();
 
@@ -20,10 +28,12 @@ export default function TeachersDashboard(props) {
                     {DateService.getGreeting(date.getHours())}, {user.email}.
                 </div>
                 <div className="date hidden md:block font-normal">
-                    {date.getUTCDate()} ב{DateService.toMonth(date.getUTCMonth())}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
+                    {date.getUTCDate()} {t('months.of')}{DateService.toMonth(date.getUTCMonth())}, {date.getFullYear()} | {date.getHours()}:{('0'+date.getMinutes()).slice(-2)}
                 </div>
             </div>
         </div>
     )
 
 }
+
+export default withNamespaces()(TeachersDashboard);

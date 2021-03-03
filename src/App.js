@@ -38,7 +38,7 @@ function App() {
     return (
         <Router>
             <div id="main"  className={"w-full min-h-screen " + (loggedIn ? 'flex': '')} style={{background: (loggedIn ? ' #F1F4F9' :  'linear-gradient(to bottom right, #B9FCFF, #fff)')}} dir={GlobalsService.settings.isRtl ? 'rtl': 'ltr'}>
-                <div className={"navbar " + (loggedIn ? 'h-screen w-1/4 shadow-none' : 'h-1/12 w-full ')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
+                <div className={"navbar sticky top-0 " + (loggedIn ? 'h-screen w-1/4 shadow-none' : 'h-1/12 w-full ')} style={{'backgroundColor': (loggedIn ? ' white' :  '#D1FDFE')}}>
                     <Navbar setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
                 </div>
 
