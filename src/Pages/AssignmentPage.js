@@ -11,7 +11,7 @@ export default function AssignmentPage() {
     const [error, setError] = useState();
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/assignment/${id}`)
+        axios.get(`/assignment/${id}`)
             .then(res => {
                 setAssignment(res.data)
                 console.log(res.data)

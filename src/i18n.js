@@ -3,6 +3,8 @@ import { reactI18nextModule } from "react-i18next";
 
 import translationEN from './locales/en/translation.json';
 import translationHE from './locales/he/translation.json';
+import translationAR from './locales/ar/translation.json';
+import translationFR from './locales/fr/translation.json';
 import GlobalsService from "./services/GlobalsService";
 
 // the translations
@@ -12,6 +14,12 @@ const resources = {
   },
   he: {
     translation: translationHE
+  },
+  ar: {
+    translation: translationAR
+  },
+  fr: {
+    translation: translationFR
   }
 };
 

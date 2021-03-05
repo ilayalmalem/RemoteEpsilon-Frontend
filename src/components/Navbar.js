@@ -68,11 +68,13 @@ function Navbar(props) {
                         loggedRoutes.map(route => (
                             <div key={route.id} onClick={() => setActiveRoute(route.id, route.to)} className={"px-2 flex items-center w-full mt-3 py-3 rounded-lg cursor-pointer " + (selected == route.id ? "bg-black text-white" : "bg-white text-black")}>
                                 <Icon>{route.icon}</Icon>
-                                <p className={"px-4 text-sm font-semibold"}>{t(route.t)}</p>
+                                <p className={"px-4 font-semibold"}>{t(route.t)}</p>
                             </div>
                         ))
                     }
-                    <div onClick={() => {
+                    <div 
+                    className={"mt-auto"}
+                    onClick={() => {
                         AuthService.logout();
                         props.setLoggedIn(false);
                         history.push('/')

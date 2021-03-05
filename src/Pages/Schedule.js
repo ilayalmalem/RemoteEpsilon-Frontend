@@ -8,7 +8,7 @@ export default function Schedule() {
     const [classEvents, setClassEvents] = useState();
 
     useEffect(async () => {
-        const {data: {classroom_events, events }} = await axios.get(`${GlobalsService.baseAPIURL}/events`);
+        const {data: {classroom_events, events }} = await axios.get(`/events`);
         setClassEvents(classroom_events);
         setEvents(events);
     }, [])

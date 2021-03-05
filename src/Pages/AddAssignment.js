@@ -66,7 +66,7 @@ function AddAssignment(props) {
             data.append("files[]", file);
         }
 
-        axios.post(`${GlobalsService.baseAPIURL}/assignments/create`, data, {headers: {'Content-Type': 'multipart/form-data'}})
+        axios.post(`/assignments/create`, data, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(res => {
                 console.log(res.data);
                 setTitleErrors(null);

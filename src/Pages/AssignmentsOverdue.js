@@ -9,7 +9,7 @@ export default function AssignmentsOverdue() {
     const [assignments, setAssignments] = useState();
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/assignments/overdue`)
+        axios.get(`/assignments/overdue`)
             .then(res => {
                 setAssignments(res.data.data);
             })

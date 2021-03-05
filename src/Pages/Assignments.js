@@ -17,7 +17,7 @@ function ForStudents() {
     const [assignments, setAssignments] = useState();
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/assignments/all`)
+        axios.get(`/assignments/all`)
             .then(r => {
                 setAssignments(r.data)
             });
@@ -40,7 +40,7 @@ function ForTeachers(props) {
     const {user} = props;
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/${user.id}/assignments`)
+        axios.get(`/${user.id}/assignments`)
             .then(r => setAssignments(r.data));
     }, [])
 

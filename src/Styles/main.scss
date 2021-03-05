@@ -32,9 +32,21 @@ $bgPrimary: #FF5791;
 }
 
 .link.link-main {
-  background-color: #FF5791;
   padding: 14px;
+  background-color: #FF5791;
   font-weight: 500;
+}
+
+.button {
+  background-color: #FF5791;
+  color: white;
+  border-radius: 99999px;
+  font-size: 15px;
+  outline: none;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
 
 #headline {
@@ -58,7 +70,9 @@ $bgPrimary: #FF5791;
   color: white;
   border: none;
   font-size: 16px;
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 
   &:hover {
     opacity: 0.8;

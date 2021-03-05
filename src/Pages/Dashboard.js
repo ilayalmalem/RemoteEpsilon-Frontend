@@ -17,7 +17,7 @@ function Dashboard({ t }) {
     const [overdueAssignments, setOverdueAssignments] = useState([]);
 
     useEffect(() => {
-        axios.get(`${GlobalsService.baseAPIURL}/assignments/overdue`)
+        axios.get(`/assignments/overdue`)
             .then(res => {
                 const data = res.data.data.slice(0, 2);
                 setOverdueAssignmentsCount(res.data.count);

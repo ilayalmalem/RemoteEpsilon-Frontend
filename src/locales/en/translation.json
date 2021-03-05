@@ -45,5 +45,11 @@
         "10": "November",
         "11": "December",
         "of": ""
+    },
+    "storage": {
+        "noDescription": "No description availble.",
+        "watch": "watch",
+        "createdAt": "Created at",
+        "updatedAt": "Last updated at"
     }
 }
