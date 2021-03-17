@@ -12,7 +12,8 @@
         "forStudents": "לתלמידים",
         "forTeachers": "למורים",
         "about": "אודות",
-        "login": "התחברות"
+        "login": "התחברות",
+        "settings": "הגדרות"
     },
     "login": {
         "idMsg": "מספרים בלבד , 9 ספרות.",
@@ -52,6 +53,10 @@
         "noDescription": "אין תיאור זמין.",
         "watch": "צפה",
         "createdAt": "נוצר ב",
-        "updatedAt": "נערך ב"
+        "updatedAt": "נערך ב",
+        "storage": "אחסון"
+    },
+    "classrooms": {
+        "yourClassrooms": "הכיתות שלך"
     }
 }

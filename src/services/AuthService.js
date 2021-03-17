@@ -34,7 +34,8 @@ const AuthService = {
 
     return response;
   },
-  getUser: () => JSON.parse(localStorage.getItem('remote_epsilon_user')),
+  getUser: () => JSON.parse(localStorage.getItem('remote_epsilon_user')).user,
+  getAssetsSize: () => JSON.parse(localStorage.getItem('remote_epsilon_user')).assetSize,
   logout: () => {
     localStorage.removeItem('remote_epsilon_user');
     localStorage.setItem('remote_epsilon_is_auth', 'false')

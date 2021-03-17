@@ -49,11 +49,18 @@ function Navbar(props) {
         },
         {
             id: 3,
-            to: '/myclass',
+            to: '/classrooms',
             icon: 'group',
-            matches: ['myclass'],
+            matches: ['classrooms'],
             t: 'navbar.myClassroom'
         },
+        {
+            id: 4,
+            to: 'settings',
+            icon: 'settings',
+            matches: ['settings'],
+            t: 'navbar.settings'
+        }
     ]
 
     return props.loggedIn ?

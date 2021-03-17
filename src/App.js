@@ -22,6 +22,10 @@ import Schedule from "./Pages/Schedule";
 import AttendanceCheck from "./Pages/AttendanceCheck";
 import Storage from "./Pages/Storage";
 import Settings from "./Pages/Settings";
+import axios from "axios";
+import MyClassroomPage from "./Pages/MyClassroomPage";
+import ClassroomStream from "./Pages/ClassroomStream";
+import ClassroomPage from "./Pages/ClassroomPage";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
@@ -36,6 +40,14 @@ function App() {
             }
         }
     }
+
+    if(AuthService.isAuthenticated()) {
+        axios.get("/user")
+            .then(res => {
+                localStorage.setItem('remote_epsilon_user', JSON.stringify(res.data))
+            })
+    }
+
 
     return (
         <Router>
@@ -57,7 +69,10 @@ function App() {
                             <PrivateRoute path="/attendance-check" component={AttendanceCheck} />
                             <PrivateRoute path="/storage" component={Storage} />
                             <PrivateRoute path="/settings" component={() => <Settings changeDir={setRtl} />} />
-                            
+                            <PrivateRoute exact path="/classrooms" component={MyClassroomPage} />
+                            <PrivateRoute exact path="/classrooms/:id" component={ClassroomPage} />
+                            <PrivateRoute path="/classrooms/:id/stream" component={ClassroomStream} />
+
                             <Route path="/teachers" exact>
                                 <div className="text-white">Teachers</div>
                             </Route>
@@ -76,7 +91,7 @@ function App() {
 
                             <Route path="/" exact>
                                 {loggedIn ?
-                                    AuthService.getUser().role == "student" ? <Dashboard /> : <TeachersDashboard />
+                                    JSON.parse(localStorage.getItem('remote_epsilon_user')).user.role == "student" ? <Dashboard /> : <TeachersDashboard />
                                     :
                                     <HomePage />
                                 }

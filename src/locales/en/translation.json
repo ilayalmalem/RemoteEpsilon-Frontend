@@ -12,7 +12,8 @@
         "forStudents": "For students",
         "forTeachers": "For teachers",
         "about": "about",
-        "login": "login"
+        "login": "login",
+        "settings": "Settings"
     },
     "login": {
         "idMsg": "numbers only, 9 numbers.",
@@ -49,7 +50,11 @@
     "storage": {
         "noDescription": "No description availble.",
         "watch": "watch",
-        "createdAt": "Created at",
-        "updatedAt": "Last updated at"
+        "createdAt": "Created at ",
+        "updatedAt": "Updated at ",
+        "storage": "Storage"
+    },
+    "classrooms": {
+        "yourClassrooms": "Your classrooms"
     }
 }

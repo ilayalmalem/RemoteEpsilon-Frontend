@@ -47,6 +47,10 @@ $bgPrimary: #FF5791;
     opacity: 0.8;
     cursor: pointer;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 #headline {

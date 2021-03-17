@@ -34,7 +34,7 @@ const GlobalsService = {
         isRtl: localStorage.getItem('remote_epsilon_is_rtl') === 'true' ? true : false,
         clockTickRate: 10000,
         lng: localStorage.getItem('remote_epsilon_language') || 'he',
-        languageDetails: () => availbleLanguages.find(language => language.langCode.toLowerCase() === localStorage.getItem('remote_epsilon_language'))
+        languageDetails: () => availbleLanguages.find(language => language.langCode.toLowerCase() === localStorage.getItem('remote_epsilon_language').trim())
     },
     availbleLanguages: availbleLanguages,
     changeLanguage: (lng, isRtl) => {

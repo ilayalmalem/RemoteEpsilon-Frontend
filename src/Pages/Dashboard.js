@@ -1,43 +1,45 @@
 import AuthService from '../services/AuthService';
 import DateService from "../services/DateService";
 import { useEffect, useState } from "react";
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import DescriptionIcon from '@material-ui/icons/Description';
-import TodayIcon from '@material-ui/icons/Today';
 import { Tooltip } from "@material-ui/core";
 import GlobalsService from "../services/GlobalsService";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { withNamespaces } from 'react-i18next';
-import { Circle } from 'rc-progress';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import ProgressProvider from '../components/ProgressProvider';
 
 function Dashboard({ t }) {
     const [date, setDate] = useState(new Date(Date.now()));
     const [overdueAssignmentsCount, setOverdueAssignmentsCount] = useState(null);
     const [overdueAssignments, setOverdueAssignments] = useState([]);
+    const [valueEnd, setValueEnd] = useState(0);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('remote_epsilon_user')).user);
+    const totalAssetSize = AuthService.getAssetsSize();
 
-    useEffect(() => {
-        axios.get(`/assignments/overdue`)
-            .then(res => {
-                const data = res.data.data.slice(0, 2);
-                setOverdueAssignmentsCount(res.data.count);
-                const unique = [...new Map(data.map(item =>
-                    [item['email'], item])).values()];
+    useEffect(async () => {
+        const res = await axios.get(`/assignments/overdue`)
+        const data = res.data.data.slice(0, 2);
+        setOverdueAssignmentsCount(res.data.count);
+        const unique = [...new Map(data.map(item =>
+            [item['email'], item])).values()];
+        setOverdueAssignments(unique);
 
-                setOverdueAssignments(unique)
-            })
-
+        const storageLimit = 10737418240 / 10; // IN BYTES (!!)
+        setValueEnd(((totalAssetSize / storageLimit) * 100).toFixed(1))
+        
         const timer = setInterval(() => {
             setDate(() => new Date(Date.now()))
-    
-        }, GlobalsService.settings.clockTickRate)
 
+        }, GlobalsService.settings.clockTickRate)
+        
         return () => {
             clearInterval(timer)
         }
     }, [])
 
-    const user = AuthService.getUser();
+
     return (
         <div className="w-full h-full">
             <div className="top-bar pb-8 font-semibold text-xl flex justify-between w-full">
@@ -51,7 +53,6 @@ function Dashboard({ t }) {
             </div>
 
             <div className="data w-full h-full">
-
                 <div className="right-side w-1/2 h-full">
                     <div className="w-11/12 p-6 rounded-lg flex h-1/3 bg-white shadow-xl">
                         <div className="left w-9/12 h-full flex flex-col justify-between">
@@ -76,19 +77,22 @@ function Dashboard({ t }) {
                         </div>
                     </div>
 
-                    <div className="w-11/12 p-6 h-1/4 flex bg-white shadow-xl rounded-lg mt-6">
+                    <div className="w-11/12 p-6 h-1/4 justify-between flex bg-white shadow-xl rounded-lg mt-6">
                         <div className="left w-1/2">
                             <p className="font-bold">
                                 {t('dashboard.storagePool')}
                             </p>
 
                             <p className="text-sm">
-                                0.9GB/10GB
+                                {(totalAssetSize / 1000000000).toString().slice(0, 4)}GB/1GB
                             </p>
                         </div>
 
-                        <div className="right flex justify-end items-end w-1/2 h-full">
-                            <Circle className="h-full" percent="10.5" strokeWidth="8" strokeColor="#4A00E0" />
+                        <div className="right  flex justify-end items-end w-1/3 h-full">
+                            <ProgressProvider valueStart={10} valueEnd={valueEnd}>
+                                {value => <CircularProgressbar className="h-full" value={value} text={`${value}%`} />}
+                            </ProgressProvider>
+
                         </div>
 
                     </div>
@@ -106,55 +110,6 @@ function Dashboard({ t }) {
 
                 </div>
             </div>
-
-            {/* 
-            <div className="data-flow flex flex-col md:flex-row mt-4 w-full h-full">
-                <div className="left-side flex flex-col h-full w-full md:w-1/2 ">
-                    <div className="assignments-overdue flex p-6 w-full h-full">
-                        <div className="left-side flex flex-col w-1/2 h-5/6 md:h-full">
-                            <div className="title font-semibold text-xl">{t('dashboard.assignmentsOverdue')}</div>
-                            <div className="by text-lg"></div>
-                            
-                        </div>
-
-                        <div >
-                            <div className="assignment-count font-normal text-red-400 text-4xl">{}</div>
-                        </div>
-                    </div>
-
-                    <div className="bottom w-full h-full justify-evenly mt-10 md:my-10 flex flex-grow">
-                        <Link className="shortcut-block flex-grow" to="/chats">
-                            <Tooltip placement="bottom" aria-label="add" title="צ׳אטים">
-                                <div className="w-full h-full flex-grow flex justify-center items-center text-4xl">
-                                    <QuestionAnswerIcon style={{ fontSize: 60 }} />
-                                </div>
-                            </Tooltip>
-                        </Link>
-
-                        <Link className="shortcut-block mx-5 flex-grow" to="/files">
-                            <Tooltip placement="bottom" aria-label="add" title="קבצים">
-                                <div className="w-full h-full flex-grow flex justify-center items-center text-4xl">
-                                    <DescriptionIcon style={{ fontSize: 60 }} />
-                                </div>
-                            </Tooltip>
-                        </Link>
-
-                        <Link className="shortcut-block flex-grow" to="/schedule">
-                            <Tooltip placement="bottom" aria-label="add" title="לוח שנה">
-                                <div className="w-full h-full flex flex-grow justify-center items-center text-4xl">
-                                    <TodayIcon style={{ fontSize: 60 }} />
-                                </div>
-                            </Tooltip>
-                        </Link>
-
-
-                    </div>
-                </div>
-
-                <div className="right-side w-1/2 h-full">
-
-                </div>
-            </div> */}
         </div>
     );
 
