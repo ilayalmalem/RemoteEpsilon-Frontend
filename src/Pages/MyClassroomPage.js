@@ -22,10 +22,11 @@ export default withNamespaces()(MyClassroomPage);
 
 function ClassroomDisplay({ data }) {
     return (
-        <div>
+        <div className="flex flex-col w-full h-full">
+
             {data.name}
 
-            <Link to={`/classrooms/${data.id}/stream`}>
+            <Link className="mt-auto" to={`/classrooms/${data.id}/stream`}>
                 <button className="cta-sm text-sm">View Stream</button>
             </Link>
 

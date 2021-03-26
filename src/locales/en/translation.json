@@ -56,5 +56,13 @@
     },
     "classrooms": {
         "yourClassrooms": "Your classrooms"
+    },
+    "settings": {
+        "language": "Language",
+        "hebrew": "Hebrew",
+        "english": "English",
+        "arabic": "Arabic",
+        "french": "French",
+        "languageHelp": "Sets the application's language and direction."
     }
 }

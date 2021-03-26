@@ -33,7 +33,7 @@ function App() {
 
     if ('deviceMemory' in navigator) {
         const deviceMemory = navigator.deviceMemory;
-        if(deviceMemory < 1 || navigator.hardwareConcurrency < 2) {
+        if(deviceMemory < 1 || navigator.hardwareConcurrency < 1) {
             const confirmed = window.confirm('Your device seems weak. activate lite mode?')
             if(confirmed) {
                 // activate lite mode

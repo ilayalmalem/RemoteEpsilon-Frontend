@@ -58,5 +58,13 @@
     },
     "classrooms": {
         "yourClassrooms": "הכיתות שלך"
+    },
+    "settings": {
+        "language": "שפה",
+        "hebrew": "עברית",
+        "english": "אנגלית",
+        "arabic": "ערבית",
+        "french": "צרפתית",
+        "languageHelp": ".מגדיר את שפת האפליקציה ואת כיוונה"
     }
 }

@@ -21,7 +21,7 @@ const availbleLanguages = [
         "dir": "true"
     },
     {
-        "name": "france",
+        "name": "french",
         "langCode": "FR",
         "countryCode": "fr",
         "dir": "false"
