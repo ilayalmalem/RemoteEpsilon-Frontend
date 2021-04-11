@@ -54,26 +54,26 @@ function Form(props) {
         };
 
         const authorized = await AuthService.authenticate(user)
-                if(authorized.state == true) {
-                    props.setLoggedIn(true);
-                    if(!localStorage.getItem('remote_epsilon_is_rtl')) {
-                        localStorage.setItem('remote_epsilon_is_rtl', 'true')
-                        localStorage.setItem('remote_epsilon_language', 'he ')
-                    }
-                    history.push({
-                        pathname: authorized.user.role == "student" ?  '/dashboard' : '/teachers',
-                    });
-                    setIdErrors('');
-                    setPasswordErrors('');
-                    setAllErrors('');
-
-                }
-                else {
-                    setIdErrors(authorized.errors.id);
-                    setPasswordErrors(authorized.errors.password);
-                    setAllErrors(authorized.errors.all);
-                }
+        if(authorized.state == true) {
+            props.setLoggedIn(true);
+            if(!localStorage.getItem('remote_epsilon_is_rtl')) {
+                localStorage.setItem('remote_epsilon_is_rtl', 'true')
+                localStorage.setItem('remote_epsilon_language', 'he ')
             }
+            history.push({
+                pathname: authorized.user.role == "student" ?  '/dashboard' : '/teachers',
+            });
+            setIdErrors('');
+            setPasswordErrors('');
+            setAllErrors('');
+
+        }
+        else {
+            setIdErrors(authorized.errors.id);
+            setPasswordErrors(authorized.errors.password);
+            setAllErrors(authorized.errors.all);
+        }
+    }
     const appDir = props.isRtl ? 'rtl' : 'ltr';
     const {classes} = props;
     return (

@@ -1,14 +1,15 @@
-import { Icon } from "@material-ui/core";
+import { Icon, IconButton, Menu, MenuItem } from "@material-ui/core";
+import { MoreVert } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { withNamespaces } from "react-i18next";
 import { Link, useHistory } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import GlobalsService from "../services/GlobalsService";
-import Menu from "./Menu";
 
 function Navbar(props) {
     const { t } = props;
     const [selected, setSelected] = useState(0);
+    const user = props.loggedIn ? AuthService.getUser() : {};
     const history = useHistory();
     const setActiveRoute = (id, to) => {
         history.push(to)
@@ -65,7 +66,7 @@ function Navbar(props) {
 
     return props.loggedIn ?
         (
-            <nav className="navbar flex items-center bg-white shadow-sm py-8 flex-col w-full h-full">
+            <nav className="navbar flex items-center bg-white shadow-sm pt-8 flex-col w-full h-full">
                 <Link onClick={() => setSelected(0)} className="no-underline" to="/">
                     <div className="logo text-lg md:text-xl font-semibold">RemoteEpsilon</div>
                 </Link>
@@ -86,6 +87,15 @@ function Navbar(props) {
                         props.setLoggedIn(false);
                         history.push('/')
                     }}>Logout</div>
+                </div>
+
+                <div className="bottom-section flex items-center justify-between  mt-auto p-4 w-full h-20" >
+                    <div className="profile w-3/4 flex items-center">
+                        <div className="profile-picture rounded-full w-12 h-12 bg-black"></div>
+                        <p className="px-2 text-sm">{user.uid}</p>
+                    </div>
+
+                    <ProfileMenu history={history} setLoggedIn={props.setLoggedIn} />
                 </div>
             </nav>
         )
@@ -109,3 +119,52 @@ function Navbar(props) {
 }
 
 export default withNamespaces()(Navbar);
+
+function ProfileMenu({history, setLoggedIn}) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = (link) => {
+        setAnchorEl(null);
+        AuthService.logout();
+        setLoggedIn(false);
+        history.push('/')
+    };
+    
+    const options = [
+        {to: '/logout', text: "Logout"}
+    ]
+
+    return (
+        <div>
+            <IconButton
+                style={{outline: 'none'}}
+                aria-label="more"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+            >
+                <MoreVert />
+            </IconButton>
+
+            <Menu
+                id="long-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+            >
+
+                {options.map(option => (
+                    <MenuItem onClick={() => handleClose(option.to)}>
+                        {option.text}
+                    </MenuItem>
+                ))}
+            </Menu>
+            </div>
+    );
+}

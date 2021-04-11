@@ -26,6 +26,7 @@ import axios from "axios";
 import MyClassroomPage from "./Pages/MyClassroomPage";
 import ClassroomStream from "./Pages/ClassroomStream";
 import ClassroomPage from "./Pages/ClassroomPage";
+import Logout from "./Pages/Logout";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(AuthService.isAuthenticated());
@@ -73,6 +74,8 @@ function App() {
                             <PrivateRoute exact path="/classrooms/:id" component={ClassroomPage} />
                             <PrivateRoute path="/classrooms/:id/stream" component={ClassroomStream} />
 
+                            <Route path="/logout" exact component={() => <Logout setLoggedIn={setLoggedIn} />}></Route>
+
                             <Route path="/teachers" exact>
                                 <div className="text-white">Teachers</div>
                             </Route>
@@ -91,7 +94,7 @@ function App() {
 
                             <Route path="/" exact>
                                 {loggedIn ?
-                                    JSON.parse(localStorage.getItem('remote_epsilon_user')).user.role == "student" ? <Dashboard /> : <TeachersDashboard />
+                                    AuthService.getUser().role == "student" ? <Dashboard /> : <TeachersDashboard />
                                     :
                                     <HomePage />
                                 }

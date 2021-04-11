@@ -15,11 +15,13 @@ function Dashboard({ t }) {
     const [overdueAssignmentsCount, setOverdueAssignmentsCount] = useState(null);
     const [overdueAssignments, setOverdueAssignments] = useState([]);
     const [valueEnd, setValueEnd] = useState(0);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('remote_epsilon_user')).user);
+    const [user, setUser] = useState(AuthService.getUser());
     const totalAssetSize = AuthService.getAssetsSize();
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(async () => {
         const res = await axios.get(`/assignments/overdue`)
+        setLoaded(true);
         const data = res.data.data.slice(0, 2);
         setOverdueAssignmentsCount(res.data.count);
         const unique = [...new Map(data.map(item =>
@@ -40,7 +42,8 @@ function Dashboard({ t }) {
     }, [])
 
 
-    return (
+    return loaded ? 
+    (
         <div className="w-full h-full">
             <div className="top-bar pb-8 font-semibold text-xl flex justify-between w-full">
                 <div className="greeting">
@@ -58,7 +61,7 @@ function Dashboard({ t }) {
                         <div className="left w-9/12 h-full flex flex-col justify-between">
                             <div>
                                 <p className="font-semibold text-red-400">
-                                    {t('dashboard.assignmentsOverdue')}
+                                    {loaded ? t('dashboard.assignmentsOverdue') : <div className="w-full h-full animate-pulse bg-gray-200 shadow rounded-md p-4 max-w-sm w-full mx-auto"></div>}
                                 </p>
                                 <p className="text-sm w-3/4">
                                     {t('dashboard.from')}{overdueAssignments && overdueAssignments.map((assignment, index) => `${assignment.user.email}`)} {t('dashboard.andMore')}
@@ -111,8 +114,85 @@ function Dashboard({ t }) {
                 </div>
             </div>
         </div>
-    );
-
+    ):
+    <SkeletonLoader />
 }
 
 export default withNamespaces()(Dashboard);
+
+
+function SkeletonLoaderElement() {
+    return <div className="w-full h-5/6 animate-pulse bg-gray-200 shadow rounded-md p-4 max-w-sm w-full mx-auto"></div>
+}
+
+function SkeletonLoader() {
+    return (
+        <div className="w-full h-full">
+            <div className="top-bar pb-8 font-semibold text-xl flex justify-between w-full">
+                <div className="greeting">
+                    <SkeletonLoaderElement />
+                </div>
+
+                <div className="date hidden md:block font-normal">
+                <SkeletonLoaderElement />
+                </div>
+            </div>
+
+            <div className="data w-full h-full">
+                <div className="right-side w-1/2 h-full">
+                    <div className="w-11/12 p-6 rounded-lg flex h-1/3 bg-white shadow-xl">
+                        <div className="left w-9/12 h-full flex flex-col justify-between">
+                            <div>
+                                <p className="font-semibold text-red-400">
+                                    <SkeletonLoaderElement />
+                                </p>
+                                <p className="text-sm w-3/4">
+                                    <SkeletonLoaderElement />
+                                </p>
+                            </div>
+
+                            <Link className="mt-auto w-1/2 mb-0" to="/assignments/overdue">
+                                <SkeletonLoaderElement />
+                            </Link>
+                        </div>
+
+                        <div className={"right w-3/12 h-full flex justify-center items-center" + (GlobalsService.settings.isRtl ? ' mr-auto' : ' ml-auto')}>
+                            <div className="title font-semibold text-3xl">
+                                <SkeletonLoaderElement />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-11/12 p-6 h-1/4 justify-between flex bg-white shadow-xl rounded-lg mt-6">
+                        <div className="left w-1/2">
+                            <p className="font-bold">
+                                <SkeletonLoaderElement />
+                            </p>
+
+                            <p className="text-sm">
+                                <SkeletonLoaderElement />
+                            </p>
+                        </div>
+
+                        <div className="right  flex justify-end items-end w-1/3 h-full">
+                            <SkeletonLoaderElement />
+                        </div>
+
+                    </div>
+
+                    <div className="w-11/12 h-1/5 p-6 bg-white shadow-xl rounded-lg mt-6">
+                        <div className="left">
+                            <p className="font-bold">
+                                <SkeletonLoaderElement />
+                            </p>
+                            <div className="text-sm">
+                                <SkeletonLoaderElement />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    )
+}
